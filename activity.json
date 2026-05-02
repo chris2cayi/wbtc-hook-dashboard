@@ -1,12 +1,12 @@
 {
-  "generatedAtUtc": "2026-05-02T20:17:15+00:00",
+  "generatedAtUtc": "2026-05-02T20:54:38+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 458712775,
-    "toBlock": 458717775,
-    "swapCount": 3,
-    "volatilityBps": 50,
+    "fromBlock": 458721720,
+    "toBlock": 458726720,
+    "swapCount": 1,
+    "volatilityBps": 250,
     "fallbackBps": 250,
     "referenceSwapFetchError": null,
     "inventorySkewBps": -58,
@@ -24,9 +24,17 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 458718105,
-    "poolSwapLookbackStartBlock": 458717605,
+    "latestBlock": 458726939,
+    "poolSwapLookbackStartBlock": 458726439,
     "recentKeeperUpdates": [
+      {
+        "blockNumber": 458726939,
+        "timeStamp": 1777755273,
+        "hash": "0xafafc8528353b37a787287ad0b8c1338b6ed0170c24ae113139137e5e31976d5",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37998,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
       {
         "blockNumber": 458718105,
         "timeStamp": 1777753027,
@@ -98,20 +106,32 @@
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 38498,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458684827,
-        "timeStamp": 1777744469,
-        "hash": "0xe0134cf31d5493ccc5a5d3ce35689f7c3896efe4f42175f1a265d3ccffc659e6",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38523,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
     "recentPoolSwaps": [],
     "keeperUpdateCount": 10,
     "poolSwapCount": 0,
     "hookTxFetchError": null,
-    "poolSwapFetchError": null
+    "poolSwapFetchError": null,
+    "riskConfigFetchError": null,
+    "riskConfig": {
+      "minFee": 300,
+      "maxFee": 15000,
+      "targetEntryFee": 400,
+      "targetExitBaseFee": 1200,
+      "volatilityMultiplier": 700,
+      "shortageMultiplier": 1200,
+      "excessInventoryDiscountMultiplier": 250,
+      "targetExitMultiplier": 3500,
+      "largeTradeMultiplier": 300,
+      "largeTargetTradeThreshold": 5000000,
+      "largeStableTradeThreshold": 10000000000,
+      "targetIsCurrency0": true,
+      "enabled": true
+    },
+    "estimatedFees": {
+      "wbtcToUsdc": 400,
+      "usdcToWbtc": 1310
+    }
   }
 }
