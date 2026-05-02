@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WBTC/USDC Hook Monitor</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b1020;
+        --panel: #121a31;
+        --muted: #8fa1c7;
+        --text: #e8eefc;
+        --accent: #5bb8ff;
+        --good: #44d492;
+        --warn: #f5c24b;
+        --bad: #ff7d7d;
+        --border: #243152;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 28px 18px 48px;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+      .sub {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      button {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 10px 14px;
+        cursor: pointer;
+        font: inherit;
+      }
+      button:hover { border-color: var(--accent); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+      }
+      .label {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .value {
+        margin-top: 8px;
+        font-size: 26px;
+        font-weight: 700;
+      }
+      .value.small {
+        font-size: 18px;
+        word-break: break-all;
+      }
+      .section {
+        margin-top: 18px;
+      }
+      .section h2 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+      .status-good { color: var(--good); }
+      .status-warn { color: var(--warn); }
+      .status-bad { color: var(--bad); }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      th, td {
+        text-align: left;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+        vertical-align: top;
+      }
+      th {
+        color: var(--muted);
+        font-weight: 600;
+      }
+      tr:last-child td { border-bottom: 0; }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12px;
+      }
+      .footer {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      @media (max-width: 920px) {
+        .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 560px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topbar">
+        <div>
+          <h1>WBTC/USDC Hook Monitor</h1>
+          <div class="sub" id="updated">Loading latest snapshot…</div>
+        </div>
+        <button id="refreshBtn" type="button">Refresh</button>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Keeper Updates</div>
+          <div class="value" id="keeperCount">-</div>
+        </div>
+        <div class="card">
+          <div class="label">Recent Pool Swaps</div>
+          <div class="value" id="swapCount">-</div>
+        </div>
+        <div class="card">
+          <div class="label">Volatility</div>
+          <div class="value" id="volatility">-</div>
+        </div>
+        <div class="card">
+          <div class="label">Inventory Skew</div>
+          <div class="value" id="skew">-</div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Pool Status</div>
+          <div class="value small" id="poolStatus">-</div>
+        </div>
+        <div class="card">
+          <div class="label">Actual WBTC Ratio</div>
+          <div class="value small" id="actualRatio">-</div>
+        </div>
+        <div class="card">
+          <div class="label">Target WBTC Ratio</div>
+          <div class="value small" id="targetRatio">-</div>
+        </div>
+        <div class="card">
+          <div class="label">Pool ID</div>
+          <div class="value small"><code id="poolId">-</code></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Recent Keeper Updates</h2>
+        <div class="hint">These are successful <code>setRiskState(...)</code> calls on your hook.</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Block</th>
+              <th>Time</th>
+              <th>Tx</th>
+              <th>From</th>
+              <th>Gas</th>
+            </tr>
+          </thead>
+          <tbody id="keeperRows"></tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>Recent Pool Swaps</h2>
+        <div class="hint">These are raw <code>Swap</code> events from the shared Uniswap v4 PoolManager filtered by your pool id.</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Block</th>
+              <th>Tx</th>
+              <th>Sender</th>
+              <th>amount0</th>
+              <th>amount1</th>
+              <th>Fee</th>
+              <th>Tick</th>
+            </tr>
+          </thead>
+          <tbody id="swapRows"></tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        Served from GitHub Pages. The page reloads data from <code>activity.json</code> when you click refresh.
+      </div>
+    </div>
+
+    <script>
+      const fmtPct = (rayLike) => (Number(rayLike) / 1e16).toFixed(2) + "%";
+      const short = (value) => value ? `${value.slice(0, 6)}...${value.slice(-4)}` : "-";
+      const txLink = (hash) => `https://arbiscan.io/tx/${hash}`;
+      const addrLink = (addr) => `https://arbiscan.io/address/${addr}`;
+
+      function statusText(swapCount) {
+        if (swapCount > 0) return { text: "Pool saw recent swaps", cls: "status-good" };
+        return { text: "Keeper alive, no recent pool swaps", cls: "status-warn" };
+      }
+
+      function row(html) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = html;
+        return tr;
+      }
+
+      async function load() {
+        const res = await fetch(`./activity.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to fetch activity.json (${res.status})`);
+        const data = await res.json();
+
+        const risk = data.referenceRisk || {};
+        const activity = data.poolActivity || {};
+
+        document.getElementById("updated").textContent =
+          `Last published: ${data.generatedAtUtc || "unknown"} UTC`;
+        document.getElementById("keeperCount").textContent = activity.keeperUpdateCount ?? "-";
+        document.getElementById("swapCount").textContent = activity.poolSwapCount ?? "-";
+        document.getElementById("volatility").textContent =
+          risk.volatilityBps != null ? `${risk.volatilityBps} bps` : "-";
+        document.getElementById("skew").textContent =
+          risk.inventorySkewBps != null ? `${risk.inventorySkewBps} bps` : "-";
+        document.getElementById("actualRatio").textContent =
+          risk.actualTotal0Ratio != null ? fmtPct(risk.actualTotal0Ratio) : "-";
+        document.getElementById("targetRatio").textContent =
+          risk.targetRatio != null ? fmtPct(risk.targetRatio) : "-";
+        document.getElementById("poolId").textContent = activity.poolId || risk.referencePoolId || "-";
+
+        const status = statusText(activity.poolSwapCount || 0);
+        const statusEl = document.getElementById("poolStatus");
+        statusEl.textContent = status.text;
+        statusEl.className = `value small ${status.cls}`;
+
+        const keeperRows = document.getElementById("keeperRows");
+        keeperRows.innerHTML = "";
+        (activity.recentKeeperUpdates || []).forEach((item) => {
+          keeperRows.appendChild(row(`
+            <td>${item.blockNumber}</td>
+            <td>${new Date((item.timeStamp || 0) * 1000).toISOString()}</td>
+            <td><a href="${txLink(item.hash)}" target="_blank" rel="noreferrer"><code>${short(item.hash)}</code></a></td>
+            <td><a href="${addrLink(item.from)}" target="_blank" rel="noreferrer"><code>${short(item.from)}</code></a></td>
+            <td>${item.gasUsed}</td>
+          `));
+        });
+        if (!activity.recentKeeperUpdates || activity.recentKeeperUpdates.length === 0) {
+          keeperRows.appendChild(row('<td colspan="5">No keeper updates found.</td>'));
+        }
+
+        const swapRows = document.getElementById("swapRows");
+        swapRows.innerHTML = "";
+        (activity.recentPoolSwaps || []).forEach((item) => {
+          swapRows.appendChild(row(`
+            <td>${item.blockNumber}</td>
+            <td><a href="${txLink(item.transactionHash)}" target="_blank" rel="noreferrer"><code>${short(item.transactionHash)}</code></a></td>
+            <td><a href="${addrLink(item.sender)}" target="_blank" rel="noreferrer"><code>${short(item.sender)}</code></a></td>
+            <td>${item.amount0}</td>
+            <td>${item.amount1}</td>
+            <td>${item.fee}</td>
+            <td>${item.tick}</td>
+          `));
+        });
+        if (!activity.recentPoolSwaps || activity.recentPoolSwaps.length === 0) {
+          swapRows.appendChild(row('<td colspan="7">No recent pool swaps found in the current lookback window.</td>'));
+        }
+      }
+
+      async function refresh() {
+        const btn = document.getElementById("refreshBtn");
+        btn.disabled = true;
+        btn.textContent = "Refreshing…";
+        try {
+          await load();
+        } catch (err) {
+          document.getElementById("updated").textContent = `Refresh failed: ${err.message}`;
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Refresh";
+        }
+      }
+
+      document.getElementById("refreshBtn").addEventListener("click", refresh);
+      refresh();
+    </script>
+  </body>
+</html>
