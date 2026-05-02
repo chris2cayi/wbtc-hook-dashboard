@@ -170,8 +170,12 @@
 
       <div class="grid">
         <div class="card">
-          <div class="label">Pool Status</div>
-          <div class="value small" id="poolStatus">-</div>
+          <div class="label">WBTC → USDC Fee</div>
+          <div class="value" id="feeWbtcToUsdc">-</div>
+        </div>
+        <div class="card">
+          <div class="label">USDC → WBTC Fee</div>
+          <div class="value" id="feeUsdcToWbtc">-</div>
         </div>
         <div class="card">
           <div class="label">Actual WBTC Ratio</div>
@@ -181,9 +185,20 @@
           <div class="label">Target WBTC Ratio</div>
           <div class="value small" id="targetRatio">-</div>
         </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Pool Status</div>
+          <div class="value small" id="poolStatus">-</div>
+        </div>
         <div class="card">
           <div class="label">Pool ID</div>
           <div class="value small"><code id="poolId">-</code></div>
+        </div>
+        <div class="card">
+          <div class="label">Hook Address</div>
+          <div class="value small"><code id="hookAddress">-</code></div>
         </div>
       </div>
 
@@ -235,6 +250,11 @@
 
     <script>
       const fmtPct = (rayLike) => (Number(rayLike) / 1e16).toFixed(2) + "%";
+      const fmtFee = (hundredthsOfBip) => {
+        const bps = Number(hundredthsOfBip) / 100;
+        const pct = (bps / 100).toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+        return `${bps.toFixed(2)} bps (${pct}%)`;
+      };
       const short = (value) => value ? `${value.slice(0, 6)}...${value.slice(-4)}` : "-";
       const txLink = (hash) => `https://arbiscan.io/tx/${hash}`;
       const addrLink = (addr) => `https://arbiscan.io/address/${addr}`;
@@ -271,6 +291,11 @@
         document.getElementById("targetRatio").textContent =
           risk.targetRatio != null ? fmtPct(risk.targetRatio) : "-";
         document.getElementById("poolId").textContent = activity.poolId || risk.referencePoolId || "-";
+        document.getElementById("hookAddress").textContent = activity.hookAddress || "-";
+        document.getElementById("feeWbtcToUsdc").textContent =
+          activity.estimatedFees?.wbtcToUsdc != null ? fmtFee(activity.estimatedFees.wbtcToUsdc) : "-";
+        document.getElementById("feeUsdcToWbtc").textContent =
+          activity.estimatedFees?.usdcToWbtc != null ? fmtFee(activity.estimatedFees.usdcToWbtc) : "-";
 
         const warningCard = document.getElementById("warningCard");
         const warningText = document.getElementById("warningText");
@@ -280,6 +305,9 @@
         }
         if (activity.poolSwapFetchError) {
           warnings.push(`Pool swap fetch warning: ${activity.poolSwapFetchError}`);
+        }
+        if (activity.riskConfigFetchError) {
+          warnings.push(`Risk config fetch warning: ${activity.riskConfigFetchError}`);
         }
         if (risk.referenceSwapFetchError) {
           warnings.push(`Reference pool fetch warning: ${risk.referenceSwapFetchError}`);
