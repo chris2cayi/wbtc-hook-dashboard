@@ -281,6 +281,9 @@
         if (activity.poolSwapFetchError) {
           warnings.push(`Pool swap fetch warning: ${activity.poolSwapFetchError}`);
         }
+        if (risk.referenceSwapFetchError) {
+          warnings.push(`Reference pool fetch warning: ${risk.referenceSwapFetchError}`);
+        }
         if (warnings.length > 0) {
           warningCard.style.display = "block";
           warningText.textContent = warnings.join(" | ");
