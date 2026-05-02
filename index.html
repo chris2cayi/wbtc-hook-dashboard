@@ -274,9 +274,16 @@
 
         const warningCard = document.getElementById("warningCard");
         const warningText = document.getElementById("warningText");
+        const warnings = [];
         if (activity.hookTxFetchError) {
+          warnings.push(`Hook tx fetch warning: ${activity.hookTxFetchError}`);
+        }
+        if (activity.poolSwapFetchError) {
+          warnings.push(`Pool swap fetch warning: ${activity.poolSwapFetchError}`);
+        }
+        if (warnings.length > 0) {
           warningCard.style.display = "block";
-          warningText.textContent = `Hook tx fetch warning: ${activity.hookTxFetchError}`;
+          warningText.textContent = warnings.join(" | ");
         } else {
           warningCard.style.display = "none";
           warningText.textContent = "";
