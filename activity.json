@@ -1,5 +1,35 @@
 {
-  "generatedAtUtc": null,
-  "referenceRisk": {},
-  "poolActivity": {}
+  "generatedAtUtc": "2026-05-02T19:53:04+00:00",
+  "referenceRisk": {
+    "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
+    "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
+    "fromBlock": 458707258,
+    "toBlock": 458712258,
+    "swapCount": 6,
+    "volatilityBps": 50,
+    "fallbackBps": 250,
+    "inventorySkewBps": -58,
+    "vaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
+    "precision": 1000000000000000000000000000000000000,
+    "actualTotal0Ratio": 494113644521453975,
+    "actualTotal1Ratio": 505886355478546025,
+    "targetWeight0": 499875428988815437,
+    "targetWeight1": 500124571011184563,
+    "useAssetWeights": true,
+    "targetRatio": 499875428988815437,
+    "fallbackSkewBps": 0
+  },
+  "poolActivity": {
+    "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
+    "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
+    "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
+    "latestBlock": 458712535,
+    "poolSwapLookbackStartBlock": 458712035,
+    "recentKeeperUpdates": [],
+    "recentPoolSwaps": [],
+    "keeperUpdateCount": 0,
+    "poolSwapCount": 0,
+    "hookTxFetchError": "NOTOK: Missing/Invalid API Key",
+    "poolSwapFetchError": null
+  }
 }
