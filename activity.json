@@ -1,19 +1,19 @@
 {
-  "generatedAtUtc": "2026-05-02T20:54:38+00:00",
+  "generatedAtUtc": "2026-05-02T22:10:30+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 458721720,
-    "toBlock": 458726720,
-    "swapCount": 1,
-    "volatilityBps": 250,
+    "fromBlock": 458743188,
+    "toBlock": 458744737,
+    "swapCount": 10,
+    "volatilityBps": 50,
     "fallbackBps": 250,
     "referenceSwapFetchError": null,
-    "inventorySkewBps": -58,
+    "inventorySkewBps": -1485,
     "vaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
     "precision": 1000000000000000000000000000000000000,
-    "actualTotal0Ratio": 494113644521453975,
-    "actualTotal1Ratio": 505886355478546025,
+    "actualTotal0Ratio": 351387596760493704,
+    "actualTotal1Ratio": 648612403239506296,
     "targetWeight0": 499875428988815437,
     "targetWeight1": 500124571011184563,
     "useAssetWeights": true,
@@ -24,9 +24,33 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 458726939,
-    "poolSwapLookbackStartBlock": 458726439,
+    "latestBlock": 458744809,
+    "poolSwapLookbackStartBlock": 458744309,
     "recentKeeperUpdates": [
+      {
+        "blockNumber": 458744809,
+        "timeStamp": 1777759825,
+        "hash": "0x88de8fc497211cbd1c7d7cb70292c5e6af43106cf2b716a1d84a8655176f4cfb",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38591,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458735604,
+        "timeStamp": 1777757506,
+        "hash": "0x6eea5151b021a7ad7dadf1285d3ade2d07f6d9bace3b4873fef1289cea78d8e7",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38450,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458727820,
+        "timeStamp": 1777755500,
+        "hash": "0xc2bedb67ebe5cf97ab0994c77c40d2b51828dfec190588d7bf56a7fbc1798789",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38571,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
       {
         "blockNumber": 458726939,
         "timeStamp": 1777755273,
@@ -82,30 +106,6 @@
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 38362,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458709240,
-        "timeStamp": 1777750713,
-        "hash": "0x9f4b57b62f7dad5661cbda0cc8ac4bbcc0867ac644645f89ca6eb5bcd42339fb",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38536,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458694033,
-        "timeStamp": 1777746804,
-        "hash": "0x76de780d894cf288fa82cd07271fcae9cb7c746c3c7f16aa6bdc4fb9f279f3d2",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38450,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458691390,
-        "timeStamp": 1777746133,
-        "hash": "0x3a2785fcd72cf37cd3d73a00e7afeb41c05f2c69bb5f8e295f27146aac9872b2",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38498,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
     "recentPoolSwaps": [],
@@ -131,7 +131,7 @@
     },
     "estimatedFees": {
       "wbtcToUsdc": 400,
-      "usdcToWbtc": 1310
+      "usdcToWbtc": 1398
     }
   }
 }
