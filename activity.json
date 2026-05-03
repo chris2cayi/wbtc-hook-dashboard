@@ -1,19 +1,19 @@
 {
-  "generatedAtUtc": "2026-05-02T22:10:30+00:00",
+  "generatedAtUtc": "2026-05-03T11:55:40+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 458743188,
-    "toBlock": 458744737,
+    "fromBlock": 458939018,
+    "toBlock": 458940547,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
     "referenceSwapFetchError": null,
-    "inventorySkewBps": -1485,
+    "inventorySkewBps": 275,
     "vaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
     "precision": 1000000000000000000000000000000000000,
-    "actualTotal0Ratio": 351387596760493704,
-    "actualTotal1Ratio": 648612403239506296,
+    "actualTotal0Ratio": 527334974446805248,
+    "actualTotal1Ratio": 472665025553194752,
     "targetWeight0": 499875428988815437,
     "targetWeight1": 500124571011184563,
     "useAssetWeights": true,
@@ -24,9 +24,73 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 458744809,
-    "poolSwapLookbackStartBlock": 458744309,
+    "latestBlock": 458940602,
+    "poolSwapLookbackStartBlock": 458940102,
     "recentKeeperUpdates": [
+      {
+        "blockNumber": 458929551,
+        "timeStamp": 1777806550,
+        "hash": "0x14c6730add56ccfbe67697a57aa870d16284cec06583bbeb7ca8dd30d8a21c4f",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37579,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458916625,
+        "timeStamp": 1777803273,
+        "hash": "0x27628a1eafc8506e5628f59d99ee8cc17396fbd2ae36a93ef370a36bf5d458f1",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37599,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458900754,
+        "timeStamp": 1777799268,
+        "hash": "0x158cd3fdeea6062c738aee4d2b6bf393f1b7b791611d7eacab4fe52d304a7213",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37613,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458878239,
+        "timeStamp": 1777793579,
+        "hash": "0xcbd2c92e066835084a42aa60a97491516a7b1b62f187ddfab24218afe8b1c87e",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37436,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458851425,
+        "timeStamp": 1777786785,
+        "hash": "0x84febbddb867ac83f8b70487284f22097dabb8a80af046155c752be5f5f345cc",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37647,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458800275,
+        "timeStamp": 1777773748,
+        "hash": "0x0f58c0bf6a69da07f58987eb1c143d46c15411e192eaaf7de92e18937a2959c7",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38151,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458770486,
+        "timeStamp": 1777766287,
+        "hash": "0xf5920af83b9ef9ab7c68cf40e6aa5386837be73c705bb6e8166bb03fe2275f54",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37880,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458756880,
+        "timeStamp": 1777762880,
+        "hash": "0x184ba1a0998d4fe64cd1b94edcca10a821a1a584de325928a20bba91bbf5c0e2",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38030,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
       {
         "blockNumber": 458744809,
         "timeStamp": 1777759825,
@@ -41,70 +105,6 @@
         "hash": "0x6eea5151b021a7ad7dadf1285d3ade2d07f6d9bace3b4873fef1289cea78d8e7",
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 38450,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458727820,
-        "timeStamp": 1777755500,
-        "hash": "0xc2bedb67ebe5cf97ab0994c77c40d2b51828dfec190588d7bf56a7fbc1798789",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38571,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458726939,
-        "timeStamp": 1777755273,
-        "hash": "0xafafc8528353b37a787287ad0b8c1338b6ed0170c24ae113139137e5e31976d5",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 37998,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458718105,
-        "timeStamp": 1777753027,
-        "hash": "0x1404b4cd043867025e11d05eabb34a6c40aac64bb67bea15243a2fe350b69aba",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38481,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458716336,
-        "timeStamp": 1777752565,
-        "hash": "0x5a0d07cb280ef069fcdbf494070256639f785075008c3f60870a00c3b8a533bc",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38325,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458715590,
-        "timeStamp": 1777752371,
-        "hash": "0xe7fe6ec422b4e970a090489d195cc198e1bcdba827e87f8fd60886432d9611dc",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38526,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458712535,
-        "timeStamp": 1777751576,
-        "hash": "0x979a689098a2c3b5975eac3eb82ae91f77145fab4700813218ab3c1342579fc5",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38230,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458711382,
-        "timeStamp": 1777751265,
-        "hash": "0xc0925c4f11dfb820452e7bec9eebb067690b8db925efabf5f411e8e95ce0b725",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38364,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458710224,
-        "timeStamp": 1777750961,
-        "hash": "0x617a231752559e32faeee88ecf78854f3bf19fbd8631c10b926fd6152be2fb7b",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38362,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
@@ -130,8 +130,8 @@
       "enabled": true
     },
     "estimatedFees": {
-      "wbtcToUsdc": 400,
-      "usdcToWbtc": 1398
+      "wbtcToUsdc": 394,
+      "usdcToWbtc": 1220
     }
   }
 }
