@@ -133,5 +133,63 @@
       "wbtcToUsdc": 400,
       "usdcToWbtc": 1361
     }
+  },
+  "strategyPlan": {
+    "strategyMode": "BalancedProfitWithWbtcBias",
+    "snapshot": {
+      "band": "Operating",
+      "wbtcWeightBps": 5273,
+      "driftBps": 274,
+      "priceDeviationBps": 42,
+      "volatilityBps": 50,
+      "recentPriceMoveBps": 18,
+      "feeValueUsd": 12,
+      "gasCostUsd": 0.35,
+      "proposedReserveInjectionUsd": 0,
+      "shouldRebalance": false,
+      "canInjectUsdcReserve": false,
+      "canCompound": false,
+      "shouldPreferIdleUsdc": false,
+      "reserveResetLikely": false
+    },
+    "plans": {
+      "reserveReset": {
+        "action": "None",
+        "allowed": false,
+        "currentWbtcWeightBps": 5273,
+        "targetWbtcWeightBps": 5000,
+        "suggestedInjectionUsd": 0,
+        "reason": "Not in reset candidate zone"
+      },
+      "compound": {
+        "action": "Hold",
+        "allowed": false,
+        "feeValueUsd": 12,
+        "gasCostUsd": 0.35,
+        "suggestedCompoundUsd": 0,
+        "suggestedKeepIdleUsd": 12,
+        "biasTowardWbtc": false,
+        "reason": "Fee value below compounding threshold"
+      },
+      "rebalance": {
+        "action": "Hold",
+        "allowed": false,
+        "currentBand": "Operating",
+        "driftBps": 274,
+        "priceDeviationBps": 42,
+        "volatilityBps": 50,
+        "reason": "No rebalance trigger hit"
+      }
+    }
+  },
+  "operatorControl": {
+    "mode": "read-only-public-dashboard",
+    "canExecuteFromDashboard": false,
+    "executionAuthority": "owner-controlled-private-automation-only",
+    "notes": [
+      "This public page is informational only.",
+      "No wallet connection, signing, or mutation endpoints are exposed here.",
+      "Onchain writes stay restricted to private owner-controlled tooling and keys."
+    ]
   }
 }
