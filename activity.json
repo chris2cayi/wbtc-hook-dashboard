@@ -1,9 +1,9 @@
 {
-  "generatedAtUtc": "2026-05-03T20:55:10+00:00",
+  "generatedAtUtc": "2026-05-03T21:52:46+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
-    "fromBlock": 459067230,
-    "toBlock": 459068649,
+    "fromBlock": 459080441,
+    "toBlock": 459082350,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
@@ -17,8 +17,8 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459068725,
-    "poolSwapLookbackStartBlock": 459068225,
+    "latestBlock": 459082405,
+    "poolSwapLookbackStartBlock": 459081905,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459033916,
@@ -103,14 +103,14 @@
     ],
     "recentPoolSwaps": [
       {
-        "blockNumber": 459068357,
-        "transactionHash": "0xd61e0eb339e32412cddecfc882848a558ddb85b0ea1e643c7479b7f3373b65aa",
-        "sender": "0x8b844f885672f333bc0042cb669255f93a4c1e6b",
-        "amount0": 4500000,
-        "amount1": -3538725521,
-        "sqrtPriceX96": 2221306903412772737373106487914,
-        "liquidity": 1342827611392,
-        "tick": 66673,
+        "blockNumber": 459082353,
+        "transactionHash": "0x34dac798bb17f3f9dd461baaf77f85ee8c15694e315886c2dbceebcc1eefd37a",
+        "sender": "0xa51afafe0263b40edaef0df8781ea9aa03e381a3",
+        "amount0": 489522,
+        "amount1": -384000000,
+        "sqrtPriceX96": 2218461637687098850013125474556,
+        "liquidity": 1590652364573,
+        "tick": 66648,
         "fee": 500
       }
     ],
