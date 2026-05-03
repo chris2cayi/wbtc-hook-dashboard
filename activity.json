@@ -1,9 +1,9 @@
 {
-  "generatedAtUtc": "2026-05-03T21:52:46+00:00",
+  "generatedAtUtc": "2026-05-03T22:53:32+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
-    "fromBlock": 459080441,
-    "toBlock": 459082350,
+    "fromBlock": 459096622,
+    "toBlock": 459096951,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
@@ -13,12 +13,129 @@
     "inventorySource": "fallback",
     "fallbackSkewBps": 0
   },
+  "activePool": "wbtc",
+  "pools": {
+    "wbtc": {
+      "label": "WBTC/USDC",
+      "poolActivity": {
+        "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
+        "poolId": "",
+        "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
+        "latestBlock": 459096964,
+        "poolSwapLookbackStartBlock": 459096464,
+        "recentKeeperUpdates": [
+          {
+            "blockNumber": 459033916,
+            "timeStamp": 1777832823,
+            "hash": "0x36a9387b99b27b46bc236185aafe00d005ed41effd2c688fec89e959abb9d07c",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 38304,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 459028718,
+            "timeStamp": 1777831498,
+            "hash": "0x9e0628355492220a176aa9f06596d1f38bba03e34ffcd775090797bbf6336c67",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 38298,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458951282,
+            "timeStamp": 1777812024,
+            "hash": "0x9d79ecea63becc6a546a5c62c10fd3302d1c8bf216fe8da8335e0c5a04d75c09",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37991,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458940596,
+            "timeStamp": 1777809332,
+            "hash": "0x2a4e44256720b0afe4ce2591553689a6238898e34bf3939f830516e50895ad95",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37743,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458929551,
+            "timeStamp": 1777806550,
+            "hash": "0x14c6730add56ccfbe67697a57aa870d16284cec06583bbeb7ca8dd30d8a21c4f",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37579,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458916625,
+            "timeStamp": 1777803273,
+            "hash": "0x27628a1eafc8506e5628f59d99ee8cc17396fbd2ae36a93ef370a36bf5d458f1",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37599,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458900754,
+            "timeStamp": 1777799268,
+            "hash": "0x158cd3fdeea6062c738aee4d2b6bf393f1b7b791611d7eacab4fe52d304a7213",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37613,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458878239,
+            "timeStamp": 1777793579,
+            "hash": "0xcbd2c92e066835084a42aa60a97491516a7b1b62f187ddfab24218afe8b1c87e",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37436,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458851425,
+            "timeStamp": 1777786785,
+            "hash": "0x84febbddb867ac83f8b70487284f22097dabb8a80af046155c752be5f5f345cc",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 37647,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          },
+          {
+            "blockNumber": 458800275,
+            "timeStamp": 1777773748,
+            "hash": "0x0f58c0bf6a69da07f58987eb1c143d46c15411e192eaaf7de92e18937a2959c7",
+            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+            "gasUsed": 38151,
+            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+          }
+        ],
+        "recentPoolSwaps": [],
+        "keeperUpdateCount": 10,
+        "poolSwapCount": 0,
+        "hookTxFetchError": null,
+        "poolSwapFetchError": "Missing pool id (set POOL_ID_V2, POOL_ID, or REFERENCE_POOL_ID)",
+        "riskConfigFetchError": "Missing hook or pool id for riskConfig",
+        "riskConfig": null,
+        "estimatedFees": null,
+        "v2HookStateFetchError": "Error: parser error:\n\n^\nexpected hex digits or the `0x` prefix for an empty hex string",
+        "v2HookState": null
+      }
+    },
+    "eth": {
+      "label": "ETH/USDC",
+      "poolActivity": {
+        "poolId": "",
+        "hookAddress": "",
+        "poolSwapCount": 0,
+        "keeperUpdateCount": 0,
+        "recentPoolSwaps": [],
+        "recentKeeperUpdates": [],
+        "poolSwapFetchError": "ETH pool not configured yet"
+      }
+    }
+  },
   "poolActivity": {
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
-    "poolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
+    "poolId": "",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459082405,
-    "poolSwapLookbackStartBlock": 459081905,
+    "latestBlock": 459096964,
+    "poolSwapLookbackStartBlock": 459096464,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459033916,
@@ -101,44 +218,15 @@
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
-    "recentPoolSwaps": [
-      {
-        "blockNumber": 459082353,
-        "transactionHash": "0x34dac798bb17f3f9dd461baaf77f85ee8c15694e315886c2dbceebcc1eefd37a",
-        "sender": "0xa51afafe0263b40edaef0df8781ea9aa03e381a3",
-        "amount0": 489522,
-        "amount1": -384000000,
-        "sqrtPriceX96": 2218461637687098850013125474556,
-        "liquidity": 1590652364573,
-        "tick": 66648,
-        "fee": 500
-      }
-    ],
+    "recentPoolSwaps": [],
     "keeperUpdateCount": 10,
-    "poolSwapCount": 1,
+    "poolSwapCount": 0,
     "hookTxFetchError": null,
-    "poolSwapFetchError": null,
-    "riskConfigFetchError": null,
-    "riskConfig": {
-      "minFee": 0,
-      "maxFee": 0,
-      "targetEntryFee": 0,
-      "targetExitBaseFee": 0,
-      "volatilityMultiplier": 0,
-      "shortageMultiplier": 0,
-      "excessInventoryDiscountMultiplier": 0,
-      "targetExitMultiplier": 0,
-      "largeTradeMultiplier": 0,
-      "largeTargetTradeThreshold": 0,
-      "largeStableTradeThreshold": 0,
-      "targetIsCurrency0": false,
-      "enabled": false
-    },
-    "estimatedFees": {
-      "wbtcToUsdc": 0,
-      "usdcToWbtc": 0
-    },
-    "v2HookStateFetchError": "Error: server returned an error response: error code 3: execution reverted, data: \"0x\"",
+    "poolSwapFetchError": "Missing pool id (set POOL_ID_V2, POOL_ID, or REFERENCE_POOL_ID)",
+    "riskConfigFetchError": "Missing hook or pool id for riskConfig",
+    "riskConfig": null,
+    "estimatedFees": null,
+    "v2HookStateFetchError": "Error: parser error:\n\n^\nexpected hex digits or the `0x` prefix for an empty hex string",
     "v2HookState": null
   },
   "strategyPlan": {
