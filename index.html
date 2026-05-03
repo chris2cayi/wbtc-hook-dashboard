@@ -160,7 +160,10 @@
           <h1>WBTC/USDC Hook Monitor</h1>
           <div class="sub" id="updated">Loading latest snapshot…</div>
         </div>
-        <button id="refreshBtn" type="button">Refresh</button>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <div class="sub" id="autoRefresh">Auto refresh: 60s</div>
+          <button id="refreshBtn" type="button">Refresh</button>
+        </div>
       </div>
 
       <div class="grid">
@@ -184,11 +187,11 @@
 
       <div class="grid">
         <div class="card">
-          <div class="label">WBTC → USDC Fee</div>
+          <div class="label">Sell WBTC Fee (WBTC → USDC)</div>
           <div class="value" id="feeWbtcToUsdc">-</div>
         </div>
         <div class="card">
-          <div class="label">USDC → WBTC Fee</div>
+          <div class="label">Buy WBTC Fee (USDC → WBTC)</div>
           <div class="value" id="feeUsdcToWbtc">-</div>
         </div>
         <div class="card">
@@ -208,7 +211,9 @@
         </div>
         <div class="card">
           <div class="label">Pool ID</div>
-          <div class="value small"><code id="poolId">-</code></div>
+          <div class="value small">
+            <a id="poolIdLink" href="#" target="_blank" rel="noreferrer"><code id="poolId">-</code></a>
+          </div>
         </div>
         <div class="card">
           <div class="label">Hook Address</div>
@@ -262,8 +267,49 @@
       </div>
 
       <div class="section">
+        <h2>Hook Parameters & Bands</h2>
+        <div class="hint">Live onchain V2 hook config and current active banding state.</div>
+        <div class="grid">
+          <div class="card">
+            <div class="label">Strategy Mode</div>
+            <div class="value small" id="hookStrategyMode">-</div>
+          </div>
+          <div class="card">
+            <div class="label">Fee Min / Max</div>
+            <div class="value small" id="hookFeeBounds">-</div>
+          </div>
+          <div class="card">
+            <div class="label">Benchmark / TTL</div>
+            <div class="value small" id="hookBenchmarkTtl">-</div>
+          </div>
+          <div class="card">
+            <div class="label">Live Bands</div>
+            <div class="value small" id="hookLiveBands">-</div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <div class="label">Shortage Bands (bps)</div>
+            <div class="value small" id="hookShortageBands">-</div>
+          </div>
+          <div class="card">
+            <div class="label">Volatility Bands (bps)</div>
+            <div class="value small" id="hookVolBands">-</div>
+          </div>
+          <div class="card">
+            <div class="label">Neutral / Defensive Fees</div>
+            <div class="value small" id="hookBandFees">-</div>
+          </div>
+          <div class="card">
+            <div class="label">Range Policy</div>
+            <div class="value small" id="rangePolicy">-</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
         <h2>Recent Keeper Updates</h2>
-        <div class="hint">These are successful <code>setRiskState(...)</code> calls on your hook.</div>
+        <div class="hint">Showing the latest 5 successful <code>setRiskState(...)</code> calls on your hook.</div>
         <table>
           <thead>
             <tr>
@@ -280,7 +326,7 @@
 
       <div class="section">
         <h2>Recent Pool Swaps</h2>
-        <div class="hint">These are raw <code>Swap</code> events from the shared Uniswap v4 PoolManager filtered by your pool id.</div>
+        <div class="hint">Showing the latest 5 raw <code>Swap</code> events from the shared Uniswap v4 PoolManager filtered by your pool id.</div>
         <table>
           <thead>
             <tr>
@@ -298,7 +344,7 @@
       </div>
 
       <div class="footer">
-        Served from GitHub Pages. The page reloads data from <code>activity.json</code> when you click refresh.
+        Served from GitHub Pages. The page reloads from <code>activity.json</code> automatically every 60 seconds.
       </div>
     </div>
 
@@ -312,6 +358,7 @@
       const short = (value) => value ? `${value.slice(0, 6)}...${value.slice(-4)}` : "-";
       const txLink = (hash) => `https://arbiscan.io/tx/${hash}`;
       const addrLink = (addr) => `https://arbiscan.io/address/${addr}`;
+      const poolLink = (poolId) => `https://app.uniswap.org/explore/pools/arbitrum/${poolId}`;
       const boolWord = (value) => value ? "Allowed" : "Blocked";
 
       function statusText(swapCount) {
@@ -333,12 +380,18 @@
         const risk = data.referenceRisk || {};
         const activity = data.poolActivity || {};
         const plan = data.strategyPlan || {};
+        const managerConfig = data.managerConfig || {};
         const snapshot = plan.snapshot || {};
         const plans = plan.plans || {};
         const reservePlan = plans.reserveReset || {};
         const compoundPlan = plans.compound || {};
         const rebalancePlan = plans.rebalance || {};
         const operatorControl = data.operatorControl || {};
+        const v2Hook = activity.v2HookState || {};
+        const v2Cfg = v2Hook.config || {};
+        const v2Bands = v2Hook.bands || {};
+        const v2Risk = v2Hook.riskState || {};
+        const rebalancePolicy = managerConfig.rebalancePolicy || {};
 
         document.getElementById("updated").textContent =
           `Last published: ${data.generatedAtUtc || "unknown"} UTC`;
@@ -352,7 +405,16 @@
           risk.actualTotal0Ratio != null ? fmtPct(risk.actualTotal0Ratio) : "-";
         document.getElementById("targetRatio").textContent =
           risk.targetRatio != null ? fmtPct(risk.targetRatio) : "-";
-        document.getElementById("poolId").textContent = activity.poolId || risk.referencePoolId || "-";
+        const poolId = activity.poolId || risk.referencePoolId || "-";
+        document.getElementById("poolId").textContent = poolId;
+        const poolAnchor = document.getElementById("poolIdLink");
+        if (poolId && poolId !== "-") {
+          poolAnchor.href = poolLink(poolId);
+          poolAnchor.style.pointerEvents = "auto";
+        } else {
+          poolAnchor.href = "#";
+          poolAnchor.style.pointerEvents = "none";
+        }
         document.getElementById("hookAddress").textContent = activity.hookAddress || "-";
         document.getElementById("feeWbtcToUsdc").textContent =
           activity.estimatedFees?.wbtcToUsdc != null ? fmtFee(activity.estimatedFees.wbtcToUsdc) : "-";
@@ -370,6 +432,33 @@
         document.getElementById("rebalancePlanAction").textContent =
           rebalancePlan.action ? `${rebalancePlan.action} (${boolWord(rebalancePlan.allowed)})` : "-";
         document.getElementById("rebalancePlanReason").textContent = rebalancePlan.reason || "";
+        document.getElementById("hookStrategyMode").textContent = v2Cfg.strategyMode || "-";
+        document.getElementById("hookFeeBounds").textContent =
+          v2Cfg.minFee != null && v2Cfg.maxFee != null ? `${v2Cfg.minFee} -> ${v2Cfg.maxFee}` : "-";
+        document.getElementById("hookBenchmarkTtl").textContent =
+          v2Cfg.benchmarkFee != null
+            ? `${v2Cfg.benchmarkFee} bps / ${v2Hook.maxStateAgeSeconds || 0}s`
+            : "-";
+        document.getElementById("hookLiveBands").textContent =
+          v2Hook.liveShortageBand && v2Hook.liveVolatilityBand
+            ? `${v2Hook.liveShortageBand} + ${v2Hook.liveVolatilityBand}`
+            : "-";
+        document.getElementById("hookShortageBands").textContent =
+          v2Bands.neutralBandBps != null
+            ? `${v2Bands.neutralBandBps}/${v2Bands.mildShortageBandBps}/${v2Bands.mediumShortageBandBps}/${v2Bands.severeShortageBandBps}`
+            : "-";
+        document.getElementById("hookVolBands").textContent =
+          v2Bands.calmVolatilityBps != null
+            ? `${v2Bands.calmVolatilityBps}/${v2Bands.normalVolatilityBps}/${v2Bands.elevatedVolatilityBps}/${v2Bands.stressedVolatilityBps}`
+            : "-";
+        document.getElementById("hookBandFees").textContent =
+          v2Bands.neutralFavorableFee != null
+            ? `Nf ${v2Bands.neutralFavorableFee} | Nd ${v2Bands.neutralDefensiveFee} | Md ${v2Bands.mediumShortageDefensiveFee} | Sd ${v2Bands.severeShortageDefensiveFee}`
+            : "-";
+        document.getElementById("rangePolicy").textContent =
+          rebalancePolicy.rangeWidthBps != null
+            ? `width ${rebalancePolicy.rangeWidthBps} bps, shift ${rebalancePolicy.rangeShiftThresholdBps} bps`
+            : "-";
 
         const warningCard = document.getElementById("warningCard");
         const warningText = document.getElementById("warningText");
@@ -383,8 +472,14 @@
         if (activity.riskConfigFetchError) {
           warnings.push(`Risk config fetch warning: ${activity.riskConfigFetchError}`);
         }
+        if (activity.v2HookStateFetchError) {
+          warnings.push(`V2 hook fetch warning: ${activity.v2HookStateFetchError}`);
+        }
         if (risk.referenceSwapFetchError) {
           warnings.push(`Reference pool fetch warning: ${risk.referenceSwapFetchError}`);
+        }
+        if (risk.inventorySkewFetchError) {
+          warnings.push(`Inventory skew fetch warning: ${risk.inventorySkewFetchError}`);
         }
         if (warnings.length > 0) {
           warningCard.style.display = "block";
@@ -414,7 +509,7 @@
 
         const keeperRows = document.getElementById("keeperRows");
         keeperRows.innerHTML = "";
-        (activity.recentKeeperUpdates || []).forEach((item) => {
+        (activity.recentKeeperUpdates || []).slice(0, 5).forEach((item) => {
           keeperRows.appendChild(row(`
             <td>${item.blockNumber}</td>
             <td>${new Date((item.timeStamp || 0) * 1000).toISOString()}</td>
@@ -429,7 +524,7 @@
 
         const swapRows = document.getElementById("swapRows");
         swapRows.innerHTML = "";
-        (activity.recentPoolSwaps || []).forEach((item) => {
+        (activity.recentPoolSwaps || []).slice(0, 5).forEach((item) => {
           swapRows.appendChild(row(`
             <td>${item.blockNumber}</td>
             <td><a href="${txLink(item.transactionHash)}" target="_blank" rel="noreferrer"><code>${short(item.transactionHash)}</code></a></td>
@@ -461,6 +556,7 @@
 
       document.getElementById("refreshBtn").addEventListener("click", refresh);
       refresh();
+      setInterval(refresh, 60_000);
     </script>
   </body>
 </html>
