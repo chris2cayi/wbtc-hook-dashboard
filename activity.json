@@ -1,19 +1,19 @@
 {
-  "generatedAtUtc": "2026-05-03T11:55:40+00:00",
+  "generatedAtUtc": "2026-05-03T12:40:35+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 458939018,
-    "toBlock": 458940547,
+    "fromBlock": 458949256,
+    "toBlock": 458951185,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
     "referenceSwapFetchError": null,
-    "inventorySkewBps": 275,
+    "inventorySkewBps": -1178,
     "vaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
     "precision": 1000000000000000000000000000000000000,
-    "actualTotal0Ratio": 527334974446805248,
-    "actualTotal1Ratio": 472665025553194752,
+    "actualTotal0Ratio": 382101313762937200,
+    "actualTotal1Ratio": 617898686237062800,
     "targetWeight0": 499875428988815437,
     "targetWeight1": 500124571011184563,
     "useAssetWeights": true,
@@ -24,9 +24,17 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 458940602,
-    "poolSwapLookbackStartBlock": 458940102,
+    "latestBlock": 458951289,
+    "poolSwapLookbackStartBlock": 458950789,
     "recentKeeperUpdates": [
+      {
+        "blockNumber": 458940596,
+        "timeStamp": 1777809332,
+        "hash": "0x2a4e44256720b0afe4ce2591553689a6238898e34bf3939f830516e50895ad95",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37743,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
       {
         "blockNumber": 458929551,
         "timeStamp": 1777806550,
@@ -98,14 +106,6 @@
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 38591,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458735604,
-        "timeStamp": 1777757506,
-        "hash": "0x6eea5151b021a7ad7dadf1285d3ade2d07f6d9bace3b4873fef1289cea78d8e7",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38450,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
     "recentPoolSwaps": [],
@@ -130,8 +130,8 @@
       "enabled": true
     },
     "estimatedFees": {
-      "wbtcToUsdc": 394,
-      "usdcToWbtc": 1220
+      "wbtcToUsdc": 400,
+      "usdcToWbtc": 1361
     }
   }
 }
