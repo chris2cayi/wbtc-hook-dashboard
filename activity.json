@@ -1,19 +1,19 @@
 {
-  "generatedAtUtc": "2026-05-03T12:40:35+00:00",
+  "generatedAtUtc": "2026-05-03T18:05:03+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 458949256,
-    "toBlock": 458951185,
+    "fromBlock": 459026318,
+    "toBlock": 459028627,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
     "referenceSwapFetchError": null,
-    "inventorySkewBps": -1178,
+    "inventorySkewBps": -3000,
     "vaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
     "precision": 1000000000000000000000000000000000000,
-    "actualTotal0Ratio": 382101313762937200,
-    "actualTotal1Ratio": 617898686237062800,
+    "actualTotal0Ratio": 0,
+    "actualTotal1Ratio": 0,
     "targetWeight0": 499875428988815437,
     "targetWeight1": 500124571011184563,
     "useAssetWeights": true,
@@ -24,9 +24,25 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 458951289,
-    "poolSwapLookbackStartBlock": 458950789,
+    "latestBlock": 459028724,
+    "poolSwapLookbackStartBlock": 459028224,
     "recentKeeperUpdates": [
+      {
+        "blockNumber": 459028718,
+        "timeStamp": 1777831498,
+        "hash": "0x9e0628355492220a176aa9f06596d1f38bba03e34ffcd775090797bbf6336c67",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38298,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
+      {
+        "blockNumber": 458951282,
+        "timeStamp": 1777812024,
+        "hash": "0x9d79ecea63becc6a546a5c62c10fd3302d1c8bf216fe8da8335e0c5a04d75c09",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 37991,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
       {
         "blockNumber": 458940596,
         "timeStamp": 1777809332,
@@ -90,22 +106,6 @@
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 37880,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458756880,
-        "timeStamp": 1777762880,
-        "hash": "0x184ba1a0998d4fe64cd1b94edcca10a821a1a584de325928a20bba91bbf5c0e2",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38030,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458744809,
-        "timeStamp": 1777759825,
-        "hash": "0x88de8fc497211cbd1c7d7cb70292c5e6af43106cf2b716a1d84a8655176f4cfb",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38591,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
     "recentPoolSwaps": [],
@@ -131,54 +131,54 @@
     },
     "estimatedFees": {
       "wbtcToUsdc": 400,
-      "usdcToWbtc": 1361
+      "usdcToWbtc": 1580
     }
   },
   "strategyPlan": {
     "strategyMode": "BalancedProfitWithWbtcBias",
     "snapshot": {
-      "band": "Operating",
-      "wbtcWeightBps": 5273,
-      "driftBps": 274,
-      "priceDeviationBps": 42,
-      "volatilityBps": 50,
-      "recentPriceMoveBps": 18,
-      "feeValueUsd": 12,
-      "gasCostUsd": 0.35,
-      "proposedReserveInjectionUsd": 0,
-      "shouldRebalance": false,
-      "canInjectUsdcReserve": false,
+      "band": "ResetCandidate",
+      "wbtcWeightBps": 6200,
+      "driftBps": 1200,
+      "priceDeviationBps": 120,
+      "volatilityBps": 200,
+      "recentPriceMoveBps": 120,
+      "feeValueUsd": 100,
+      "gasCostUsd": 5,
+      "proposedReserveInjectionUsd": 1000,
+      "shouldRebalance": true,
+      "canInjectUsdcReserve": true,
       "canCompound": false,
-      "shouldPreferIdleUsdc": false,
-      "reserveResetLikely": false
+      "shouldPreferIdleUsdc": true,
+      "reserveResetLikely": true
     },
     "plans": {
       "reserveReset": {
-        "action": "None",
-        "allowed": false,
-        "currentWbtcWeightBps": 5273,
+        "action": "InjectUsdcReserve",
+        "allowed": true,
+        "currentWbtcWeightBps": 6200,
         "targetWbtcWeightBps": 5000,
-        "suggestedInjectionUsd": 0,
-        "reason": "Not in reset candidate zone"
+        "suggestedInjectionUsd": 1000,
+        "reason": "Reset candidate zone with reserve safeguards satisfied"
       },
       "compound": {
         "action": "Hold",
         "allowed": false,
-        "feeValueUsd": 12,
-        "gasCostUsd": 0.35,
+        "feeValueUsd": 100,
+        "gasCostUsd": 5,
         "suggestedCompoundUsd": 0,
-        "suggestedKeepIdleUsd": 12,
+        "suggestedKeepIdleUsd": 100,
         "biasTowardWbtc": false,
-        "reason": "Fee value below compounding threshold"
+        "reason": "Reserve reset takes priority over compounding"
       },
       "rebalance": {
-        "action": "Hold",
-        "allowed": false,
-        "currentBand": "Operating",
-        "driftBps": 274,
-        "priceDeviationBps": 42,
-        "volatilityBps": 50,
-        "reason": "No rebalance trigger hit"
+        "action": "Rebalance",
+        "allowed": true,
+        "currentBand": "ResetCandidate",
+        "driftBps": 1200,
+        "priceDeviationBps": 120,
+        "volatilityBps": 200,
+        "reason": "Inventory drift crossed rebalance threshold"
       }
     }
   },
