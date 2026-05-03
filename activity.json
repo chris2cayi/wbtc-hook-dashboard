@@ -1,10 +1,10 @@
 {
-  "generatedAtUtc": "2026-05-03T18:05:03+00:00",
+  "generatedAtUtc": "2026-05-03T18:27:14+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 459026318,
-    "toBlock": 459028627,
+    "fromBlock": 459030713,
+    "toBlock": 459033722,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
@@ -24,9 +24,17 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459028724,
-    "poolSwapLookbackStartBlock": 459028224,
+    "latestBlock": 459033916,
+    "poolSwapLookbackStartBlock": 459033416,
     "recentKeeperUpdates": [
+      {
+        "blockNumber": 459033916,
+        "timeStamp": 1777832823,
+        "hash": "0x36a9387b99b27b46bc236185aafe00d005ed41effd2c688fec89e959abb9d07c",
+        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
+        "gasUsed": 38304,
+        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
+      },
       {
         "blockNumber": 459028718,
         "timeStamp": 1777831498,
@@ -97,14 +105,6 @@
         "hash": "0x0f58c0bf6a69da07f58987eb1c143d46c15411e192eaaf7de92e18937a2959c7",
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 38151,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458770486,
-        "timeStamp": 1777766287,
-        "hash": "0xf5920af83b9ef9ab7c68cf40e6aa5386837be73c705bb6e8166bb03fe2275f54",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 37880,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
