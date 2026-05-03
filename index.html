@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WBTC/USDC Hook Monitor</title>
+    <title>Uniswap Hook Monitor</title>
     <style>
       :root {
         color-scheme: dark;
@@ -157,10 +157,14 @@
     <div class="wrap">
       <div class="topbar">
         <div>
-          <h1>WBTC/USDC Hook Monitor</h1>
+          <h1>Uniswap Hook Monitor</h1>
           <div class="sub" id="updated">Loading latest snapshot…</div>
         </div>
         <div style="display:flex; gap:10px; align-items:center;">
+          <select id="poolSelect" style="border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:8px;padding:10px 12px;">
+            <option value="wbtc">WBTC/USDC</option>
+            <option value="eth">ETH/USDC</option>
+          </select>
           <div class="sub" id="autoRefresh">Auto refresh: 60s</div>
           <button id="refreshBtn" type="button">Refresh</button>
         </div>
@@ -377,8 +381,11 @@
         if (!res.ok) throw new Error(`Failed to fetch activity.json (${res.status})`);
         const data = await res.json();
 
+        const selectedPool = document.getElementById("poolSelect").value;
+        const pools = data.pools || {};
+        const selectedData = pools[selectedPool] || {};
         const risk = data.referenceRisk || {};
-        const activity = data.poolActivity || {};
+        const activity = selectedData.poolActivity || data.poolActivity || {};
         const plan = data.strategyPlan || {};
         const managerConfig = data.managerConfig || {};
         const snapshot = plan.snapshot || {};
@@ -420,8 +427,8 @@
           activity.estimatedFees?.wbtcToUsdc != null ? fmtFee(activity.estimatedFees.wbtcToUsdc) : "-";
         document.getElementById("feeUsdcToWbtc").textContent =
           activity.estimatedFees?.usdcToWbtc != null ? fmtFee(activity.estimatedFees.usdcToWbtc) : "-";
-        document.getElementById("strategyMode").textContent = plan.strategyMode || "-";
-        document.getElementById("strategyBand").textContent = snapshot.band || "-";
+        document.getElementById("strategyMode").textContent = selectedPool === "wbtc" ? (plan.strategyMode || "-") : "N/A";
+        document.getElementById("strategyBand").textContent = selectedPool === "wbtc" ? (snapshot.band || "-") : "N/A";
         document.getElementById("operatorControlMode").textContent = operatorControl.mode || "read-only";
         document.getElementById("reservePlanAction").textContent =
           reservePlan.action ? `${reservePlan.action} (${boolWord(reservePlan.allowed)})` : "-";
@@ -432,7 +439,7 @@
         document.getElementById("rebalancePlanAction").textContent =
           rebalancePlan.action ? `${rebalancePlan.action} (${boolWord(rebalancePlan.allowed)})` : "-";
         document.getElementById("rebalancePlanReason").textContent = rebalancePlan.reason || "";
-        document.getElementById("hookStrategyMode").textContent = v2Cfg.strategyMode || "-";
+        document.getElementById("hookStrategyMode").textContent = selectedPool === "wbtc" ? (v2Cfg.strategyMode || "-") : "N/A";
         document.getElementById("hookFeeBounds").textContent =
           v2Cfg.minFee != null && v2Cfg.maxFee != null ? `${v2Cfg.minFee} -> ${v2Cfg.maxFee}` : "-";
         document.getElementById("hookBenchmarkTtl").textContent =
@@ -443,22 +450,22 @@
           v2Hook.liveShortageBand && v2Hook.liveVolatilityBand
             ? `${v2Hook.liveShortageBand} + ${v2Hook.liveVolatilityBand}`
             : "-";
-        document.getElementById("hookShortageBands").textContent =
+        document.getElementById("hookShortageBands").textContent = selectedPool === "wbtc" ?
           v2Bands.neutralBandBps != null
             ? `${v2Bands.neutralBandBps}/${v2Bands.mildShortageBandBps}/${v2Bands.mediumShortageBandBps}/${v2Bands.severeShortageBandBps}`
-            : "-";
-        document.getElementById("hookVolBands").textContent =
+            : "-" : "N/A";
+        document.getElementById("hookVolBands").textContent = selectedPool === "wbtc" ?
           v2Bands.calmVolatilityBps != null
             ? `${v2Bands.calmVolatilityBps}/${v2Bands.normalVolatilityBps}/${v2Bands.elevatedVolatilityBps}/${v2Bands.stressedVolatilityBps}`
-            : "-";
-        document.getElementById("hookBandFees").textContent =
+            : "-" : "N/A";
+        document.getElementById("hookBandFees").textContent = selectedPool === "wbtc" ?
           v2Bands.neutralFavorableFee != null
             ? `Nf ${v2Bands.neutralFavorableFee} | Nd ${v2Bands.neutralDefensiveFee} | Md ${v2Bands.mediumShortageDefensiveFee} | Sd ${v2Bands.severeShortageDefensiveFee}`
-            : "-";
-        document.getElementById("rangePolicy").textContent =
+            : "-" : "N/A";
+        document.getElementById("rangePolicy").textContent = selectedPool === "wbtc" ?
           rebalancePolicy.rangeWidthBps != null
             ? `width ${rebalancePolicy.rangeWidthBps} bps, shift ${rebalancePolicy.rangeShiftThresholdBps} bps`
-            : "-";
+            : "-" : "N/A";
 
         const warningCard = document.getElementById("warningCard");
         const warningText = document.getElementById("warningText");
@@ -555,6 +562,7 @@
       }
 
       document.getElementById("refreshBtn").addEventListener("click", refresh);
+      document.getElementById("poolSelect").addEventListener("change", refresh);
       refresh();
       setInterval(refresh, 60_000);
     </script>
