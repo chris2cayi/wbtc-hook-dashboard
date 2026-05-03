@@ -1,31 +1,24 @@
 {
-  "generatedAtUtc": "2026-05-03T18:27:14+00:00",
+  "generatedAtUtc": "2026-05-03T19:21:44+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
-    "gammaVaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "fromBlock": 459030713,
-    "toBlock": 459033722,
+    "fromBlock": 459044020,
+    "toBlock": 459046649,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
     "referenceSwapFetchError": null,
-    "inventorySkewBps": -3000,
-    "vaultAddress": "0xBB0e3c0afb1CDF5193BB40AD60E0d3B07d9f6A9f",
-    "precision": 1000000000000000000000000000000000000,
-    "actualTotal0Ratio": 0,
-    "actualTotal1Ratio": 0,
-    "targetWeight0": 499875428988815437,
-    "targetWeight1": 500124571011184563,
-    "useAssetWeights": true,
-    "targetRatio": 499875428988815437,
+    "inventorySkewBps": 0,
+    "inventorySkewFetchError": null,
+    "inventorySource": "fallback",
     "fallbackSkewBps": 0
   },
   "poolActivity": {
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
-    "poolId": "0xebb612d11dfaa4dbb4d303cab67716c56b07d9767a79a7062dfd939150864efd",
+    "poolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459033916,
-    "poolSwapLookbackStartBlock": 459033416,
+    "latestBlock": 459046738,
+    "poolSwapLookbackStartBlock": 459046238,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459033916,
@@ -108,31 +101,78 @@
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
-    "recentPoolSwaps": [],
+    "recentPoolSwaps": [
+      {
+        "blockNumber": 459046470,
+        "transactionHash": "0xa83624eeea8d225d7244af36c25f9dbb4e5046df4084855657f8ff3cec1ef1de",
+        "sender": "0x4c3ccc98c01103be72bcfd29e1d2454c98d1a6e3",
+        "amount0": -1080000,
+        "amount1": 847237696,
+        "sqrtPriceX96": 2219601075381634026351474438735,
+        "liquidity": 1635327066741,
+        "tick": 66658,
+        "fee": 500
+      },
+      {
+        "blockNumber": 459046680,
+        "transactionHash": "0xf8f1e0be5a39d2746b8986b9397a220e32aec4f3bc59b87cb34ff4a41440fe9b",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -1941252,
+        "amount1": 1522792887,
+        "sqrtPriceX96": 2219527299263812312828083175424,
+        "liquidity": 1635327066741,
+        "tick": 66657,
+        "fee": 500
+      },
+      {
+        "blockNumber": 459046682,
+        "transactionHash": "0xbbbd369896c5c9654f0f901a0519617f0e3db6d8042907f6068319038c519a04",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -1974224,
+        "amount1": 1548553068,
+        "sqrtPriceX96": 2219452275119311033628008382464,
+        "liquidity": 1635327066741,
+        "tick": 66657,
+        "fee": 500
+      },
+      {
+        "blockNumber": 459046682,
+        "transactionHash": "0x6eb6a5e536303aa048d588589d4de4d4d1042c49381086ec46e8327128667808",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -2448283,
+        "amount1": 1920253182,
+        "sqrtPriceX96": 2219359242884799922651332083712,
+        "liquidity": 1635327066741,
+        "tick": 66656,
+        "fee": 500
+      }
+    ],
     "keeperUpdateCount": 10,
-    "poolSwapCount": 0,
+    "poolSwapCount": 4,
     "hookTxFetchError": null,
     "poolSwapFetchError": null,
     "riskConfigFetchError": null,
     "riskConfig": {
-      "minFee": 300,
-      "maxFee": 15000,
-      "targetEntryFee": 400,
-      "targetExitBaseFee": 1200,
-      "volatilityMultiplier": 700,
-      "shortageMultiplier": 1200,
-      "excessInventoryDiscountMultiplier": 250,
-      "targetExitMultiplier": 3500,
-      "largeTradeMultiplier": 300,
-      "largeTargetTradeThreshold": 5000000,
-      "largeStableTradeThreshold": 10000000000,
-      "targetIsCurrency0": true,
-      "enabled": true
+      "minFee": 0,
+      "maxFee": 0,
+      "targetEntryFee": 0,
+      "targetExitBaseFee": 0,
+      "volatilityMultiplier": 0,
+      "shortageMultiplier": 0,
+      "excessInventoryDiscountMultiplier": 0,
+      "targetExitMultiplier": 0,
+      "largeTradeMultiplier": 0,
+      "largeTargetTradeThreshold": 0,
+      "largeStableTradeThreshold": 0,
+      "targetIsCurrency0": false,
+      "enabled": false
     },
     "estimatedFees": {
-      "wbtcToUsdc": 400,
-      "usdcToWbtc": 1580
-    }
+      "wbtcToUsdc": 0,
+      "usdcToWbtc": 0
+    },
+    "v2HookStateFetchError": "Error: server returned an error response: error code 3: execution reverted, data: \"0x\"",
+    "v2HookState": null
   },
   "strategyPlan": {
     "strategyMode": "BalancedProfitWithWbtcBias",
@@ -191,5 +231,37 @@
       "No wallet connection, signing, or mutation endpoints are exposed here.",
       "Onchain writes stay restricted to private owner-controlled tooling and keys."
     ]
+  },
+  "managerConfig": {
+    "version": 1,
+    "inventoryPolicy": {
+      "workingTargetWbtcWeightBps": 5000,
+      "neutralZoneLowerBps": 4800,
+      "neutralZoneUpperBps": 5500,
+      "accumulationUpperTriggerBps": 6000,
+      "reserveResetTargetBps": 5000
+    },
+    "rebalancePolicy": {
+      "rebalanceTriggerDeviationBps": 350,
+      "rangeWidthBps": 1200,
+      "rangeShiftThresholdBps": 450,
+      "widenOnHighVolatility": true,
+      "pauseOnExtremeSkew": true,
+      "maxRebalancesPerDay": 2
+    },
+    "idleBalancePolicy": {
+      "minIdleWbtc": "0.0005",
+      "minIdleUsdc": "50",
+      "preferKeepUsdcIdleWhenShortWbtc": true
+    },
+    "reservePolicy": {
+      "allowUsdcReserveInjection": true,
+      "allowRoutineWbtcReserveInjection": false,
+      "maxReserveInjectionUsd": 2000,
+      "minSecondsBetweenReserveInjections": 86400,
+      "maxVolatilityBpsForReserveInjection": 350,
+      "maxRecentPriceMoveBpsForReserveInjection": 500,
+      "disableReserveInjectionOnExtremeTrend": true
+    }
   }
 }
