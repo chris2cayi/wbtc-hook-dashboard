@@ -1,9 +1,9 @@
 {
-  "generatedAtUtc": "2026-05-04T03:49:33+00:00",
+  "generatedAtUtc": "2026-05-04T06:46:44+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
-    "fromBlock": 459167271,
-    "toBlock": 459167500,
+    "fromBlock": 459209771,
+    "toBlock": 459210070,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
@@ -21,8 +21,8 @@
         "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
         "poolId": "",
         "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-        "latestBlock": 459167510,
-        "poolSwapLookbackStartBlock": 459167010,
+        "latestBlock": 459210081,
+        "poolSwapLookbackStartBlock": 459209581,
         "recentKeeperUpdates": [
           {
             "blockNumber": 459137090,
@@ -126,8 +126,8 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459167510,
-    "poolSwapLookbackStartBlock": 459167010,
+    "latestBlock": 459210081,
+    "poolSwapLookbackStartBlock": 459209581,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459137090,
