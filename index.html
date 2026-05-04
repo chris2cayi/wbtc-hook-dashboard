@@ -504,17 +504,21 @@
         const warningCard = document.getElementById("warningCard");
         const warningText = document.getElementById("warningText");
         const warnings = [];
+        const ignorable = (msg) =>
+          !msg ||
+          msg.includes("not configured") ||
+          msg.includes("ETH pool not configured yet");
         if (activity.hookTxFetchError) {
-          warnings.push(`Hook tx fetch warning: ${activity.hookTxFetchError}`);
+          if (!ignorable(activity.hookTxFetchError)) warnings.push(`Hook tx fetch warning: ${activity.hookTxFetchError}`);
         }
         if (activity.poolSwapFetchError) {
-          warnings.push(`Pool swap fetch warning: ${activity.poolSwapFetchError}`);
+          if (!ignorable(activity.poolSwapFetchError)) warnings.push(`Pool swap fetch warning: ${activity.poolSwapFetchError}`);
         }
         if (activity.riskConfigFetchError) {
-          warnings.push(`Risk config fetch warning: ${activity.riskConfigFetchError}`);
+          if (!ignorable(activity.riskConfigFetchError)) warnings.push(`Risk config fetch warning: ${activity.riskConfigFetchError}`);
         }
         if (activity.v2HookStateFetchError) {
-          warnings.push(`V2 hook fetch warning: ${activity.v2HookStateFetchError}`);
+          if (!ignorable(activity.v2HookStateFetchError)) warnings.push(`V2 hook fetch warning: ${activity.v2HookStateFetchError}`);
         }
         if (risk.referenceSwapFetchError) {
           warnings.push(`Reference pool fetch warning: ${risk.referenceSwapFetchError}`);
