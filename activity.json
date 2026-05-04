@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-04T20:59:41+00:00",
+  "generatedAtUtc": "2026-05-04T21:37:32+00:00",
   "activePool": "eth",
   "pools": {
     "eth": {
@@ -8,8 +8,8 @@
         "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
         "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
         "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-        "latestBlock": 459414683,
-        "poolSwapLookbackStartBlock": 459414183,
+        "latestBlock": 459423763,
+        "poolSwapLookbackStartBlock": 459423263,
         "recentKeeperUpdates": [
           {
             "blockNumber": 459137090,
@@ -84,9 +84,43 @@
             "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
           }
         ],
-        "recentPoolSwaps": [],
+        "recentPoolSwaps": [
+          {
+            "blockNumber": 459423374,
+            "transactionHash": "0x99d53d16c2802cab93c7e24519da162f1e9fe0b1a2b3db385e15320bf78c0026",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": 495300023502300475,
+            "amount1": -1170014751,
+            "sqrtPriceX96": 3849806338114249241395200,
+            "liquidity": 815801284869283633,
+            "tick": -198652,
+            "fee": 500
+          },
+          {
+            "blockNumber": 459423376,
+            "transactionHash": "0x489881902a8d8c3686cb60b69563b9c4974cd84e8398f8be6e4646b37597782c",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": 418737097791816964,
+            "amount1": -989209028,
+            "sqrtPriceX96": 3849902359079684126277632,
+            "liquidity": 815801284869283633,
+            "tick": -198651,
+            "fee": 500
+          },
+          {
+            "blockNumber": 459423380,
+            "transactionHash": "0x4756b1a47f40ecc1a757b776b134792f982823474a2c0f1ea14ba6b44d772e3f",
+            "sender": "0xa51afafe0263b40edaef0df8781ea9aa03e381a3",
+            "amount0": 42328593383931925,
+            "amount1": -99998250,
+            "sqrtPriceX96": 3849912065752547831244206,
+            "liquidity": 815801284869283633,
+            "tick": -198651,
+            "fee": 500
+          }
+        ],
         "keeperUpdateCount": 9,
-        "poolSwapCount": 0,
+        "poolSwapCount": 3,
         "hookTxFetchError": null,
         "poolSwapFetchError": null,
         "riskConfigFetchError": null,
@@ -118,8 +152,8 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459414683,
-    "poolSwapLookbackStartBlock": 459414183,
+    "latestBlock": 459423763,
+    "poolSwapLookbackStartBlock": 459423263,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459137090,
@@ -194,9 +228,43 @@
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
-    "recentPoolSwaps": [],
+    "recentPoolSwaps": [
+      {
+        "blockNumber": 459423374,
+        "transactionHash": "0x99d53d16c2802cab93c7e24519da162f1e9fe0b1a2b3db385e15320bf78c0026",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": 495300023502300475,
+        "amount1": -1170014751,
+        "sqrtPriceX96": 3849806338114249241395200,
+        "liquidity": 815801284869283633,
+        "tick": -198652,
+        "fee": 500
+      },
+      {
+        "blockNumber": 459423376,
+        "transactionHash": "0x489881902a8d8c3686cb60b69563b9c4974cd84e8398f8be6e4646b37597782c",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": 418737097791816964,
+        "amount1": -989209028,
+        "sqrtPriceX96": 3849902359079684126277632,
+        "liquidity": 815801284869283633,
+        "tick": -198651,
+        "fee": 500
+      },
+      {
+        "blockNumber": 459423380,
+        "transactionHash": "0x4756b1a47f40ecc1a757b776b134792f982823474a2c0f1ea14ba6b44d772e3f",
+        "sender": "0xa51afafe0263b40edaef0df8781ea9aa03e381a3",
+        "amount0": 42328593383931925,
+        "amount1": -99998250,
+        "sqrtPriceX96": 3849912065752547831244206,
+        "liquidity": 815801284869283633,
+        "tick": -198651,
+        "fee": 500
+      }
+    ],
     "keeperUpdateCount": 9,
-    "poolSwapCount": 0,
+    "poolSwapCount": 3,
     "hookTxFetchError": null,
     "poolSwapFetchError": null,
     "riskConfigFetchError": null,
@@ -223,8 +291,91 @@
     "v2HookState": null
   },
   "ethPositionPerformance": {
-    "latest": null,
-    "recent": [],
-    "warning": "ETH position config missing"
+    "latest": {
+      "timestamp": "2026-05-04T21:37:32Z",
+      "tokenId": 167294,
+      "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
+      "tick": -198651,
+      "tickLower": -199210,
+      "tickUpper": -198410,
+      "priceUsdcPerEth": 2361.252619257413,
+      "range": {
+        "status": "in-range",
+        "priceLower": 2232.8120958031477,
+        "priceUpper": 2418.7667934901838,
+        "tickDistanceToLower": 559,
+        "tickDistanceToUpper": 241,
+        "distanceToLowerBps": 575.241076916795,
+        "distanceToUpperBps": 243.57484567178057
+      },
+      "position": {
+        "eth": 0.08499878306322019,
+        "usdc": 461.8431815122151,
+        "valueUsd": 662.5467806539364,
+        "ethWeightBps": 3029
+      },
+      "feesUnclaimed": {
+        "eth": 0.000658636878817504,
+        "usdc": 1.610766,
+        "valueUsd": 3.1659740552473585
+      },
+      "totalValueUsd": 665.7127547091837,
+      "wallet": {
+        "address": "0x3A4b297C3CbD477525aE13EE6C8929Bd34397Af3",
+        "eth": 0.016696203493510826,
+        "usdc": 6.705548
+      },
+      "performance": {
+        "baselineTimestamp": "2026-05-04T21:37:32Z",
+        "holdValueUsdAtCurrentPrice": 662.5467806539364,
+        "inventoryImpactUsd": 2.1697843828613356e-14,
+        "feesValueUsd": 3.1659740552473585,
+        "netBenefitUsd": 3.1659740552473803
+      }
+    },
+    "recent": [
+      {
+        "timestamp": "2026-05-04T21:37:32Z",
+        "tokenId": 167294,
+        "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
+        "tick": -198651,
+        "tickLower": -199210,
+        "tickUpper": -198410,
+        "priceUsdcPerEth": 2361.252619257413,
+        "range": {
+          "status": "in-range",
+          "priceLower": 2232.8120958031477,
+          "priceUpper": 2418.7667934901838,
+          "tickDistanceToLower": 559,
+          "tickDistanceToUpper": 241,
+          "distanceToLowerBps": 575.241076916795,
+          "distanceToUpperBps": 243.57484567178057
+        },
+        "position": {
+          "eth": 0.08499878306322019,
+          "usdc": 461.8431815122151,
+          "valueUsd": 662.5467806539364,
+          "ethWeightBps": 3029
+        },
+        "feesUnclaimed": {
+          "eth": 0.000658636878817504,
+          "usdc": 1.610766,
+          "valueUsd": 3.1659740552473585
+        },
+        "totalValueUsd": 665.7127547091837,
+        "wallet": {
+          "address": "0x3A4b297C3CbD477525aE13EE6C8929Bd34397Af3",
+          "eth": 0.016696203493510826,
+          "usdc": 6.705548
+        },
+        "performance": {
+          "baselineTimestamp": "2026-05-04T21:37:32Z",
+          "holdValueUsdAtCurrentPrice": 662.5467806539364,
+          "inventoryImpactUsd": 2.1697843828613356e-14,
+          "feesValueUsd": 3.1659740552473585,
+          "netBenefitUsd": 3.1659740552473803
+        }
+      }
+    ]
   }
 }
