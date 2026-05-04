@@ -1,9 +1,9 @@
 {
-  "generatedAtUtc": "2026-05-03T23:55:53+00:00",
+  "generatedAtUtc": "2026-05-04T01:42:26+00:00",
   "referenceRisk": {
     "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
-    "fromBlock": 459109275,
-    "toBlock": 459111714,
+    "fromBlock": 459136516,
+    "toBlock": 459136995,
     "swapCount": 10,
     "volatilityBps": 50,
     "fallbackBps": 250,
@@ -21,8 +21,8 @@
         "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
         "poolId": "",
         "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-        "latestBlock": 459111805,
-        "poolSwapLookbackStartBlock": 459111305,
+        "latestBlock": 459137022,
+        "poolSwapLookbackStartBlock": 459136522,
         "recentKeeperUpdates": [
           {
             "blockNumber": 459033916,
@@ -95,25 +95,17 @@
             "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
             "gasUsed": 37647,
             "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-          },
-          {
-            "blockNumber": 458800275,
-            "timeStamp": 1777773748,
-            "hash": "0x0f58c0bf6a69da07f58987eb1c143d46c15411e192eaaf7de92e18937a2959c7",
-            "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-            "gasUsed": 38151,
-            "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
           }
         ],
         "recentPoolSwaps": [],
-        "keeperUpdateCount": 10,
+        "keeperUpdateCount": 9,
         "poolSwapCount": 0,
         "hookTxFetchError": null,
-        "poolSwapFetchError": "Missing pool id (set POOL_ID_V2, POOL_ID, or REFERENCE_POOL_ID)",
-        "riskConfigFetchError": "Missing hook or pool id for riskConfig",
+        "poolSwapFetchError": "Pool ID not configured",
+        "riskConfigFetchError": "Risk config not configured",
         "riskConfig": null,
         "estimatedFees": null,
-        "v2HookStateFetchError": "Error: parser error:\n\n^\nexpected hex digits or the `0x` prefix for an empty hex string",
+        "v2HookStateFetchError": "V2 hook state not configured",
         "v2HookState": null
       }
     },
@@ -134,8 +126,8 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459111805,
-    "poolSwapLookbackStartBlock": 459111305,
+    "latestBlock": 459137022,
+    "poolSwapLookbackStartBlock": 459136522,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459033916,
@@ -208,25 +200,17 @@
         "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
         "gasUsed": 37647,
         "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
-      },
-      {
-        "blockNumber": 458800275,
-        "timeStamp": 1777773748,
-        "hash": "0x0f58c0bf6a69da07f58987eb1c143d46c15411e192eaaf7de92e18937a2959c7",
-        "from": "0x705f8c6ab0de1bd7d639595ae06dfee0be950fb1",
-        "gasUsed": 38151,
-        "functionName": "setRiskState(tuple key,uint32 volatilityBps,int32 targetInventorySkewBps)"
       }
     ],
     "recentPoolSwaps": [],
-    "keeperUpdateCount": 10,
+    "keeperUpdateCount": 9,
     "poolSwapCount": 0,
     "hookTxFetchError": null,
-    "poolSwapFetchError": "Missing pool id (set POOL_ID_V2, POOL_ID, or REFERENCE_POOL_ID)",
-    "riskConfigFetchError": "Missing hook or pool id for riskConfig",
+    "poolSwapFetchError": "Pool ID not configured",
+    "riskConfigFetchError": "Risk config not configured",
     "riskConfig": null,
     "estimatedFees": null,
-    "v2HookStateFetchError": "Error: parser error:\n\n^\nexpected hex digits or the `0x` prefix for an empty hex string",
+    "v2HookStateFetchError": "V2 hook state not configured",
     "v2HookState": null
   },
   "strategyPlan": {
