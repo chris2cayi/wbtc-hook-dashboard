@@ -1,28 +1,15 @@
 {
-  "generatedAtUtc": "2026-05-04T20:22:03+00:00",
-  "referenceRisk": {
-    "referencePoolId": "0x80c735c5a0222241f211b3edb8df2ccefad94553ec18f1c29143f0399c78f500",
-    "fromBlock": 459405303,
-    "toBlock": 459405752,
-    "swapCount": 10,
-    "volatilityBps": 50,
-    "fallbackBps": 250,
-    "referenceSwapFetchError": null,
-    "inventorySkewBps": 0,
-    "inventorySkewFetchError": null,
-    "inventorySource": "fallback",
-    "fallbackSkewBps": 0
-  },
-  "activePool": "wbtc",
+  "generatedAtUtc": "2026-05-04T20:59:41+00:00",
+  "activePool": "eth",
   "pools": {
-    "wbtc": {
-      "label": "WBTC/USDC",
+    "eth": {
+      "label": "ETH/USDC",
       "poolActivity": {
         "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
-        "poolId": "",
+        "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
         "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-        "latestBlock": 459405778,
-        "poolSwapLookbackStartBlock": 459405278,
+        "latestBlock": 459414683,
+        "poolSwapLookbackStartBlock": 459414183,
         "recentKeeperUpdates": [
           {
             "blockNumber": 459137090,
@@ -101,33 +88,38 @@
         "keeperUpdateCount": 9,
         "poolSwapCount": 0,
         "hookTxFetchError": null,
-        "poolSwapFetchError": "Pool ID not configured",
-        "riskConfigFetchError": "Risk config not configured",
-        "riskConfig": null,
-        "estimatedFees": null,
-        "v2HookStateFetchError": "V2 hook state not configured",
+        "poolSwapFetchError": null,
+        "riskConfigFetchError": null,
+        "riskConfig": {
+          "minFee": 0,
+          "maxFee": 0,
+          "targetEntryFee": 0,
+          "targetExitBaseFee": 0,
+          "volatilityMultiplier": 0,
+          "shortageMultiplier": 0,
+          "excessInventoryDiscountMultiplier": 0,
+          "targetExitMultiplier": 0,
+          "largeTradeMultiplier": 0,
+          "largeTargetTradeThreshold": 0,
+          "largeStableTradeThreshold": 0,
+          "targetIsCurrency0": false,
+          "enabled": false
+        },
+        "estimatedFees": {
+          "wbtcToUsdc": 0,
+          "usdcToWbtc": 0
+        },
+        "v2HookStateFetchError": "Error: server returned an error response: error code 3: execution reverted, data: \"0x\"",
         "v2HookState": null
-      }
-    },
-    "eth": {
-      "label": "ETH/USDC",
-      "poolActivity": {
-        "poolId": "",
-        "hookAddress": "",
-        "poolSwapCount": 0,
-        "keeperUpdateCount": 0,
-        "recentPoolSwaps": [],
-        "recentKeeperUpdates": [],
-        "poolSwapFetchError": "ETH pool not configured yet"
       }
     }
   },
   "poolActivity": {
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
-    "poolId": "",
+    "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 459405778,
-    "poolSwapLookbackStartBlock": 459405278,
+    "latestBlock": 459414683,
+    "poolSwapLookbackStartBlock": 459414183,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459137090,
@@ -206,101 +198,33 @@
     "keeperUpdateCount": 9,
     "poolSwapCount": 0,
     "hookTxFetchError": null,
-    "poolSwapFetchError": "Pool ID not configured",
-    "riskConfigFetchError": "Risk config not configured",
-    "riskConfig": null,
-    "estimatedFees": null,
-    "v2HookStateFetchError": "V2 hook state not configured",
+    "poolSwapFetchError": null,
+    "riskConfigFetchError": null,
+    "riskConfig": {
+      "minFee": 0,
+      "maxFee": 0,
+      "targetEntryFee": 0,
+      "targetExitBaseFee": 0,
+      "volatilityMultiplier": 0,
+      "shortageMultiplier": 0,
+      "excessInventoryDiscountMultiplier": 0,
+      "targetExitMultiplier": 0,
+      "largeTradeMultiplier": 0,
+      "largeTargetTradeThreshold": 0,
+      "largeStableTradeThreshold": 0,
+      "targetIsCurrency0": false,
+      "enabled": false
+    },
+    "estimatedFees": {
+      "wbtcToUsdc": 0,
+      "usdcToWbtc": 0
+    },
+    "v2HookStateFetchError": "Error: server returned an error response: error code 3: execution reverted, data: \"0x\"",
     "v2HookState": null
   },
-  "strategyPlan": {
-    "strategyMode": "BalancedProfitWithWbtcBias",
-    "snapshot": {
-      "band": "ResetCandidate",
-      "wbtcWeightBps": 6200,
-      "driftBps": 1200,
-      "priceDeviationBps": 120,
-      "volatilityBps": 200,
-      "recentPriceMoveBps": 120,
-      "feeValueUsd": 100,
-      "gasCostUsd": 5,
-      "proposedReserveInjectionUsd": 1000,
-      "shouldRebalance": true,
-      "canInjectUsdcReserve": true,
-      "canCompound": false,
-      "shouldPreferIdleUsdc": true,
-      "reserveResetLikely": true
-    },
-    "plans": {
-      "reserveReset": {
-        "action": "InjectUsdcReserve",
-        "allowed": true,
-        "currentWbtcWeightBps": 6200,
-        "targetWbtcWeightBps": 5000,
-        "suggestedInjectionUsd": 1000,
-        "reason": "Reset candidate zone with reserve safeguards satisfied"
-      },
-      "compound": {
-        "action": "Hold",
-        "allowed": false,
-        "feeValueUsd": 100,
-        "gasCostUsd": 5,
-        "suggestedCompoundUsd": 0,
-        "suggestedKeepIdleUsd": 100,
-        "biasTowardWbtc": false,
-        "reason": "Reserve reset takes priority over compounding"
-      },
-      "rebalance": {
-        "action": "Rebalance",
-        "allowed": true,
-        "currentBand": "ResetCandidate",
-        "driftBps": 1200,
-        "priceDeviationBps": 120,
-        "volatilityBps": 200,
-        "reason": "Inventory drift crossed rebalance threshold"
-      }
-    }
-  },
-  "operatorControl": {
-    "mode": "read-only-public-dashboard",
-    "canExecuteFromDashboard": false,
-    "executionAuthority": "owner-controlled-private-automation-only",
-    "notes": [
-      "This public page is informational only.",
-      "No wallet connection, signing, or mutation endpoints are exposed here.",
-      "Onchain writes stay restricted to private owner-controlled tooling and keys."
-    ]
-  },
-  "managerConfig": {
-    "version": 1,
-    "inventoryPolicy": {
-      "workingTargetWbtcWeightBps": 5000,
-      "neutralZoneLowerBps": 4800,
-      "neutralZoneUpperBps": 5500,
-      "accumulationUpperTriggerBps": 6000,
-      "reserveResetTargetBps": 5000
-    },
-    "rebalancePolicy": {
-      "rebalanceTriggerDeviationBps": 350,
-      "rangeWidthBps": 1200,
-      "rangeShiftThresholdBps": 450,
-      "widenOnHighVolatility": true,
-      "pauseOnExtremeSkew": true,
-      "maxRebalancesPerDay": 2
-    },
-    "idleBalancePolicy": {
-      "minIdleWbtc": "0.0005",
-      "minIdleUsdc": "50",
-      "preferKeepUsdcIdleWhenShortWbtc": true
-    },
-    "reservePolicy": {
-      "allowUsdcReserveInjection": true,
-      "allowRoutineWbtcReserveInjection": false,
-      "maxReserveInjectionUsd": 2000,
-      "minSecondsBetweenReserveInjections": 86400,
-      "maxVolatilityBpsForReserveInjection": 350,
-      "maxRecentPriceMoveBpsForReserveInjection": 500,
-      "disableReserveInjectionOnExtremeTrend": true
-    }
+  "ethPositionPerformance": {
+    "latest": null,
+    "recent": [],
+    "warning": "ETH position config missing"
   }
 }

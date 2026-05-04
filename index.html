@@ -3,334 +3,130 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Uniswap Hook Monitor</title>
+    <title>ETH/USDC Control Tower</title>
     <style>
       :root {
-        color-scheme: dark;
-        --bg: #0b1020;
-        --panel: #121a31;
-        --muted: #8fa1c7;
-        --text: #e8eefc;
-        --accent: #5bb8ff;
-        --good: #44d492;
-        --warn: #f5c24b;
-        --bad: #ff7d7d;
-        --border: #243152;
+        --bg: #0d1117;
+        --panel: #161b22;
+        --muted: #8b949e;
+        --text: #e6edf3;
+        --line: #30363d;
+        --good: #3fb950;
+        --warn: #d29922;
+        --bad: #f85149;
+        --accent: #58a6ff;
       }
-
       * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 28px 18px 48px;
-      }
-      .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
-        margin-bottom: 18px;
-      }
-      h1 {
-        margin: 0;
-        font-size: 28px;
-        line-height: 1.1;
-      }
-      .sub {
-        margin-top: 6px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-      button {
-        border: 1px solid var(--border);
-        background: var(--panel);
-        color: var(--text);
-        border-radius: 8px;
-        padding: 10px 14px;
-        cursor: pointer;
-        font: inherit;
-      }
-      button:hover { border-color: var(--accent); }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
-        margin-bottom: 18px;
-      }
-      .card {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 14px;
-      }
-      .label {
-        color: var(--muted);
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-      }
-      .value {
-        margin-top: 8px;
-        font-size: 26px;
-        font-weight: 700;
-      }
-      .value.small {
-        font-size: 18px;
-        word-break: break-all;
-      }
-      .section {
-        margin-top: 18px;
-      }
-      .section h2 {
-        margin: 0 0 10px;
-        font-size: 18px;
-      }
-      .hint {
-        color: var(--muted);
-        font-size: 13px;
-        margin-bottom: 10px;
-      }
-      .status-good { color: var(--good); }
-      .status-warn { color: var(--warn); }
-      .status-bad { color: var(--bad); }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        overflow: hidden;
-      }
-      th, td {
-        text-align: left;
-        padding: 10px 12px;
-        border-bottom: 1px solid var(--border);
-        font-size: 13px;
-        vertical-align: top;
-      }
-      th {
-        color: var(--muted);
-        font-weight: 600;
-      }
+      body { margin: 0; font-family: Inter, system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 1160px; margin: 0 auto; padding: 24px 16px 40px; }
+      .top { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+      h1 { margin: 0; font-size: 28px; }
+      .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+      .btn { border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+      .btn:hover { border-color: var(--accent); }
+      .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 12px; }
+      .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+      .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+      .v { margin-top: 6px; font-size: 24px; font-weight: 700; }
+      .vs { margin-top: 6px; font-size: 16px; font-weight: 600; overflow-wrap: anywhere; }
+      .good { color: var(--good); }
+      .warn { color: var(--warn); }
+      .bad { color: var(--bad); }
+      .section { margin-top: 14px; }
+      .section h2 { margin: 0 0 8px; font-size: 18px; }
+      .hint { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+      table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+      th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 12px; }
+      th { color: var(--muted); font-weight: 600; }
       tr:last-child td { border-bottom: 0; }
-      code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 12px;
-      }
-      .footer {
-        margin-top: 18px;
-        color: var(--muted);
-        font-size: 12px;
-      }
-      .plan-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-      .plan-list {
-        margin: 10px 0 0;
-        padding-left: 18px;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .plan-list li {
-        margin: 6px 0;
-      }
+      .spark { width: 100%; height: 70px; background: #0f141c; border: 1px solid var(--line); border-radius: 8px; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
       a { color: var(--accent); text-decoration: none; }
       a:hover { text-decoration: underline; }
-      @media (max-width: 920px) {
-        .grid, .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      }
-      @media (max-width: 560px) {
-        .grid, .plan-grid { grid-template-columns: 1fr; }
-      }
+      @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+      @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <div class="topbar">
+      <div class="top">
         <div>
-          <h1>Uniswap Hook Monitor</h1>
-          <div class="sub" id="updated">Loading latest snapshot…</div>
+          <h1>ETH/USDC Control Tower</h1>
+          <div class="sub" id="updated">Loading…</div>
         </div>
         <div style="display:flex; gap:10px; align-items:center;">
-          <select id="poolSelect" style="border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:8px;padding:10px 12px;">
-            <option value="wbtc">WBTC/USDC</option>
-            <option value="eth">ETH/USDC</option>
-          </select>
-          <div class="sub" id="autoRefresh">Auto refresh: 60s</div>
-          <button id="refreshBtn" type="button">Refresh</button>
+          <div class="sub">Auto refresh: 60s</div>
+          <button class="btn" id="refreshBtn">Refresh</button>
         </div>
       </div>
 
       <div class="grid">
-        <div class="card">
-          <div class="label">Keeper Updates</div>
-          <div class="value" id="keeperCount">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Recent Pool Swaps</div>
-          <div class="value" id="swapCount">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Volatility</div>
-          <div class="value" id="volatility">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Inventory Skew</div>
-          <div class="value" id="skew">-</div>
-        </div>
+        <div class="card"><div class="k">ETH Price</div><div class="v" id="ethPrice">-</div></div>
+        <div class="card"><div class="k">Position Value</div><div class="v" id="positionValue">-</div></div>
+        <div class="card"><div class="k">Unclaimed Fees</div><div class="v" id="feesValue">-</div></div>
+        <div class="card"><div class="k">Net Benefit vs Baseline</div><div class="v" id="netBenefit">-</div></div>
       </div>
 
       <div class="grid">
-        <div class="card">
-          <div class="label">Sell WBTC Fee (WBTC → USDC)</div>
-          <div class="value" id="feeWbtcToUsdc">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Buy WBTC Fee (USDC → WBTC)</div>
-          <div class="value" id="feeUsdcToWbtc">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Actual WBTC Ratio</div>
-          <div class="value small" id="actualRatio">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Target WBTC Ratio</div>
-          <div class="value small" id="targetRatio">-</div>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="label">Pool Status</div>
-          <div class="value small" id="poolStatus">-</div>
-        </div>
-        <div class="card">
-          <div class="label">Pool ID</div>
-          <div class="value small">
-            <a id="poolIdLink" href="#" target="_blank" rel="noreferrer"><code id="poolId">-</code></a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="label">Hook Address</div>
-          <div class="value small"><code id="hookAddress">-</code></div>
-        </div>
-      </div>
-
-      <div class="card" id="warningCard" style="display:none; margin-bottom: 18px;">
-        <div class="label">Monitor Warning</div>
-        <div class="value small status-warn" id="warningText">-</div>
+        <div class="card"><div class="k">ETH Weight</div><div class="v" id="ethWeight">-</div></div>
+        <div class="card"><div class="k">Inventory Impact</div><div class="v" id="inventoryImpact">-</div></div>
+        <div class="card"><div class="k">Estimated Fee APR (24h)</div><div class="v" id="feeApr">-</div></div>
+        <div class="card"><div class="k">Range Status</div><div class="v" id="rangeStatus">-</div></div>
       </div>
 
       <div class="section">
-        <h2>Strategy Plan</h2>
-        <div class="hint">Read-only operator view. It shows what the private controller would recommend, but the public page cannot execute any action.</div>
+        <h2>Range & Tick Proximity</h2>
         <div class="grid">
-          <div class="card">
-            <div class="label">Strategy Mode</div>
-            <div class="value small" id="strategyMode">-</div>
-          </div>
-          <div class="card">
-            <div class="label">Current Band</div>
-            <div class="value small" id="strategyBand">-</div>
-          </div>
-          <div class="card">
-            <div class="label">Operator Control</div>
-            <div class="value small status-good" id="operatorControlMode">-</div>
-          </div>
-        </div>
-        <div class="plan-grid">
-          <div class="card">
-            <div class="label">Reserve Reset Plan</div>
-            <div class="value small" id="reservePlanAction">-</div>
-            <div class="sub" id="reservePlanReason"></div>
-          </div>
-          <div class="card">
-            <div class="label">Compound Plan</div>
-            <div class="value small" id="compoundPlanAction">-</div>
-            <div class="sub" id="compoundPlanReason"></div>
-          </div>
-          <div class="card">
-            <div class="label">Rebalance Plan</div>
-            <div class="value small" id="rebalancePlanAction">-</div>
-            <div class="sub" id="rebalancePlanReason"></div>
-          </div>
-        </div>
-        <div class="card" style="margin-top:14px;">
-          <div class="label">Operator Safeguards</div>
-          <ul class="plan-list" id="operatorNotes"></ul>
+          <div class="card"><div class="k">Range (Price)</div><div class="vs" id="rangePrice">-</div></div>
+          <div class="card"><div class="k">Current / Lower / Upper Tick</div><div class="vs" id="rangeTicks">-</div></div>
+          <div class="card"><div class="k">Distance To Lower</div><div class="vs" id="distLower">-</div></div>
+          <div class="card"><div class="k">Distance To Upper</div><div class="vs" id="distUpper">-</div></div>
         </div>
       </div>
 
       <div class="section">
-        <h2>Hook Parameters & Bands</h2>
-        <div class="hint">Live onchain V2 hook config and current active banding state.</div>
+        <h2>Evolution</h2>
         <div class="grid">
           <div class="card">
-            <div class="label">Strategy Mode</div>
-            <div class="value small" id="hookStrategyMode">-</div>
+            <div class="k">Price Trend</div>
+            <svg class="spark" id="sparkPrice" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
           </div>
           <div class="card">
-            <div class="label">Fee Min / Max</div>
-            <div class="value small" id="hookFeeBounds">-</div>
+            <div class="k">Fees Trend</div>
+            <svg class="spark" id="sparkFees" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
           </div>
           <div class="card">
-            <div class="label">Benchmark / TTL</div>
-            <div class="value small" id="hookBenchmarkTtl">-</div>
+            <div class="k">Net Benefit Trend</div>
+            <svg class="spark" id="sparkNet" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
           </div>
           <div class="card">
-            <div class="label">Live Bands</div>
-            <div class="value small" id="hookLiveBands">-</div>
-          </div>
-        </div>
-        <div class="grid">
-          <div class="card">
-            <div class="label">Shortage Bands (bps)</div>
-            <div class="value small" id="hookShortageBands">-</div>
-          </div>
-          <div class="card">
-            <div class="label">Volatility Bands (bps)</div>
-            <div class="value small" id="hookVolBands">-</div>
-          </div>
-          <div class="card">
-            <div class="label">Neutral / Defensive Fees</div>
-            <div class="value small" id="hookBandFees">-</div>
-          </div>
-          <div class="card">
-            <div class="label">Range Policy</div>
-            <div class="value small" id="rangePolicy">-</div>
+            <div class="k">Pool Activity (Lookback)</div>
+            <div class="vs" id="poolActivity">-</div>
           </div>
         </div>
       </div>
 
       <div class="section">
-        <h2>Recent Keeper Updates</h2>
-        <div class="hint">Showing the latest 5 successful <code>setRiskState(...)</code> calls on your hook.</div>
+        <h2>Recent Snapshots</h2>
+        <div class="hint">Latest onchain snapshots used for control and execution decisions.</div>
         <table>
           <thead>
             <tr>
-              <th>Block</th>
               <th>Time</th>
-              <th>Tx</th>
-              <th>From</th>
-              <th>Gas</th>
+              <th>Price</th>
+              <th>Position</th>
+              <th>Fees</th>
+              <th>Inv. Impact</th>
+              <th>Net Benefit</th>
+              <th>ETH Weight</th>
             </tr>
           </thead>
-          <tbody id="keeperRows"></tbody>
+          <tbody id="rowsPerf"></tbody>
         </table>
       </div>
 
       <div class="section">
         <h2>Recent Pool Swaps</h2>
-        <div class="hint">Showing the latest 5 raw <code>Swap</code> events from the shared Uniswap v4 PoolManager filtered by your pool id.</div>
         <table>
           <thead>
             <tr>
@@ -339,266 +135,164 @@
               <th>Sender</th>
               <th>amount0</th>
               <th>amount1</th>
-              <th>Fee</th>
               <th>Tick</th>
             </tr>
           </thead>
-          <tbody id="swapRows"></tbody>
+          <tbody id="rowsSwaps"></tbody>
         </table>
-      </div>
-
-      <div class="section">
-        <h2>NFT Archive</h2>
-        <div class="hint">Pre/post realign snapshots archived from onchain reads before and after each migration.</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Phase</th>
-              <th>Token ID</th>
-              <th>Ticks</th>
-              <th>Liquidity</th>
-              <th>Tx</th>
-            </tr>
-          </thead>
-          <tbody id="nftArchiveRows"></tbody>
-        </table>
-      </div>
-
-      <div class="footer">
-        Served from GitHub Pages. The page reloads from <code>activity.json</code> automatically every 60 seconds.
       </div>
     </div>
 
     <script>
-      const fmtPct = (rayLike) => (Number(rayLike) / 1e16).toFixed(2) + "%";
-      const fmtFee = (hundredthsOfBip) => {
-        const bps = Number(hundredthsOfBip) / 100;
-        const pct = (bps / 100).toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
-        return `${bps.toFixed(2)} bps (${pct}%)`;
+      const txLink = (h) => `https://arbiscan.io/tx/${h}`;
+      const short = (v) => (v ? `${v.slice(0, 6)}...${v.slice(-4)}` : "-");
+      const usd = (n, sign = false) => {
+        if (!Number.isFinite(n)) return "-";
+        const p = `${sign && n > 0 ? "+" : ""}$${n.toFixed(2)}`;
+        return p;
       };
-      const short = (value) => value ? `${value.slice(0, 6)}...${value.slice(-4)}` : "-";
-      const txLink = (hash) => `https://arbiscan.io/tx/${hash}`;
-      const addrLink = (addr) => `https://arbiscan.io/address/${addr}`;
-      const poolLink = (poolId) => `https://app.uniswap.org/explore/pools/arbitrum/${poolId}`;
-      const boolWord = (value) => value ? "Allowed" : "Blocked";
+      const pct = (n) => Number.isFinite(n) ? `${n.toFixed(2)}%` : "-";
+      const cls = (n) => (n > 0 ? "good" : n < 0 ? "bad" : "warn");
 
-      function statusText(swapCount) {
-        if (swapCount > 0) return { text: "Pool saw recent swaps", cls: "status-good" };
-        return { text: "Keeper alive, no recent pool swaps", cls: "status-warn" };
+      function setVal(id, text, className = "") {
+        const el = document.getElementById(id);
+        el.textContent = text;
+        el.className = className ? `v ${className}` : "v";
       }
 
-      function row(html) {
-        const tr = document.createElement("tr");
-        tr.innerHTML = html;
-        return tr;
+      function drawSpark(svgId, values, color) {
+        const svg = document.getElementById(svgId);
+        svg.innerHTML = "";
+        if (!values || values.length < 2) return;
+        const w = 300, h = 70, pad = 6;
+        const min = Math.min(...values), max = Math.max(...values);
+        const span = max - min || 1;
+        const points = values.map((v, i) => {
+          const x = pad + (i * (w - pad * 2)) / (values.length - 1);
+          const y = h - pad - ((v - min) * (h - pad * 2)) / span;
+          return `${x},${y}`;
+        }).join(" ");
+        const poly = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+        poly.setAttribute("fill", "none");
+        poly.setAttribute("stroke", color);
+        poly.setAttribute("stroke-width", "2");
+        poly.setAttribute("points", points);
+        svg.appendChild(poly);
       }
 
-      async function loadArchive() {
-        const res = await fetch(`./data/positions_history.jsonl?ts=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) return [];
-        const text = await res.text();
-        return text
-          .split("\n")
-          .map((line) => line.trim())
-          .filter(Boolean)
-          .map((line) => {
-            try { return JSON.parse(line); } catch { return null; }
-          })
-          .filter(Boolean)
-          .slice(-8)
-          .reverse();
+      function computeApr(recent) {
+        if (!recent || recent.length < 2) return null;
+        const first = recent[0], last = recent[recent.length - 1];
+        const t0 = Date.parse(first.timestamp || "");
+        const t1 = Date.parse(last.timestamp || "");
+        if (!Number.isFinite(t0) || !Number.isFinite(t1) || t1 <= t0) return null;
+        const h = (t1 - t0) / 3_600_000;
+        if (h <= 0) return null;
+        const f0 = Number(first.feesUnclaimed?.valueUsd || 0);
+        const f1 = Number(last.feesUnclaimed?.valueUsd || 0);
+        const feeDelta = Math.max(0, f1 - f0);
+        const avgPos = (Number(first.position?.valueUsd || 0) + Number(last.position?.valueUsd || 0)) / 2;
+        if (avgPos <= 0) return null;
+        return (feeDelta / avgPos) * (24 / h) * 365 * 100;
+      }
+
+      async function loadJson(path) {
+        const r = await fetch(`${path}?ts=${Date.now()}`, { cache: "no-store" });
+        if (!r.ok) throw new Error(`${path} ${r.status}`);
+        return r.json();
       }
 
       async function load() {
-        const res = await fetch(`./activity.json?ts=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) throw new Error(`Failed to fetch activity.json (${res.status})`);
-        const data = await res.json();
+        const activity = await loadJson("./activity.json");
+        const perf = activity.ethPositionPerformance || {};
+        const latest = perf.latest || null;
+        const recent = perf.recent || [];
+        const ethPool = activity.pools?.eth?.poolActivity || {};
 
-        const selectedPool = document.getElementById("poolSelect").value;
-        const pools = data.pools || {};
-        const selectedData = pools[selectedPool] || {};
-        const risk = data.referenceRisk || {};
-        const activity = selectedData.poolActivity || data.poolActivity || {};
-        const plan = data.strategyPlan || {};
-        const managerConfig = data.managerConfig || {};
-        const snapshot = plan.snapshot || {};
-        const plans = plan.plans || {};
-        const reservePlan = plans.reserveReset || {};
-        const compoundPlan = plans.compound || {};
-        const rebalancePlan = plans.rebalance || {};
-        const operatorControl = data.operatorControl || {};
-        const v2Hook = activity.v2HookState || {};
-        const v2Cfg = v2Hook.config || {};
-        const v2Bands = v2Hook.bands || {};
-        const v2Risk = v2Hook.riskState || {};
-        const rebalancePolicy = managerConfig.rebalancePolicy || {};
+        document.getElementById("updated").textContent = `Last publish: ${activity.generatedAtUtc || "-"} UTC`;
 
-        document.getElementById("updated").textContent =
-          `Last published: ${data.generatedAtUtc || "unknown"} UTC`;
-        document.getElementById("keeperCount").textContent = activity.keeperUpdateCount ?? "-";
-        document.getElementById("swapCount").textContent = activity.poolSwapCount ?? "-";
-        document.getElementById("volatility").textContent =
-          risk.volatilityBps != null ? `${risk.volatilityBps} bps` : "-";
-        document.getElementById("skew").textContent =
-          risk.inventorySkewBps != null ? `${risk.inventorySkewBps} bps` : "-";
-        document.getElementById("actualRatio").textContent =
-          risk.actualTotal0Ratio != null ? fmtPct(risk.actualTotal0Ratio) : "-";
-        document.getElementById("targetRatio").textContent =
-          risk.targetRatio != null ? fmtPct(risk.targetRatio) : "-";
-        const poolId = activity.poolId || risk.referencePoolId || "-";
-        document.getElementById("poolId").textContent = poolId;
-        const poolAnchor = document.getElementById("poolIdLink");
-        if (poolId && poolId !== "-") {
-          poolAnchor.href = poolLink(poolId);
-          poolAnchor.style.pointerEvents = "auto";
-        } else {
-          poolAnchor.href = "#";
-          poolAnchor.style.pointerEvents = "none";
-        }
-        document.getElementById("hookAddress").textContent = activity.hookAddress || "-";
-        document.getElementById("feeWbtcToUsdc").textContent =
-          activity.estimatedFees?.wbtcToUsdc != null ? fmtFee(activity.estimatedFees.wbtcToUsdc) : "-";
-        document.getElementById("feeUsdcToWbtc").textContent =
-          activity.estimatedFees?.usdcToWbtc != null ? fmtFee(activity.estimatedFees.usdcToWbtc) : "-";
-        document.getElementById("strategyMode").textContent = selectedPool === "wbtc" ? (plan.strategyMode || "-") : "N/A";
-        document.getElementById("strategyBand").textContent = selectedPool === "wbtc" ? (snapshot.band || "-") : "N/A";
-        document.getElementById("operatorControlMode").textContent = operatorControl.mode || "read-only";
-        document.getElementById("reservePlanAction").textContent =
-          reservePlan.action ? `${reservePlan.action} (${boolWord(reservePlan.allowed)})` : "-";
-        document.getElementById("reservePlanReason").textContent = reservePlan.reason || "";
-        document.getElementById("compoundPlanAction").textContent =
-          compoundPlan.action ? `${compoundPlan.action} (${boolWord(compoundPlan.allowed)})` : "-";
-        document.getElementById("compoundPlanReason").textContent = compoundPlan.reason || "";
-        document.getElementById("rebalancePlanAction").textContent =
-          rebalancePlan.action ? `${rebalancePlan.action} (${boolWord(rebalancePlan.allowed)})` : "-";
-        document.getElementById("rebalancePlanReason").textContent = rebalancePlan.reason || "";
-        document.getElementById("hookStrategyMode").textContent = selectedPool === "wbtc" ? (v2Cfg.strategyMode || "-") : "N/A";
-        document.getElementById("hookFeeBounds").textContent =
-          v2Cfg.minFee != null && v2Cfg.maxFee != null ? `${v2Cfg.minFee} -> ${v2Cfg.maxFee}` : "-";
-        document.getElementById("hookBenchmarkTtl").textContent =
-          v2Cfg.benchmarkFee != null
-            ? `${v2Cfg.benchmarkFee} bps / ${v2Hook.maxStateAgeSeconds || 0}s`
-            : "-";
-        document.getElementById("hookLiveBands").textContent =
-          v2Hook.liveShortageBand && v2Hook.liveVolatilityBand
-            ? `${v2Hook.liveShortageBand} + ${v2Hook.liveVolatilityBand}`
-            : "-";
-        document.getElementById("hookShortageBands").textContent = selectedPool === "wbtc" ?
-          v2Bands.neutralBandBps != null
-            ? `${v2Bands.neutralBandBps}/${v2Bands.mildShortageBandBps}/${v2Bands.mediumShortageBandBps}/${v2Bands.severeShortageBandBps}`
-            : "-" : "N/A";
-        document.getElementById("hookVolBands").textContent = selectedPool === "wbtc" ?
-          v2Bands.calmVolatilityBps != null
-            ? `${v2Bands.calmVolatilityBps}/${v2Bands.normalVolatilityBps}/${v2Bands.elevatedVolatilityBps}/${v2Bands.stressedVolatilityBps}`
-            : "-" : "N/A";
-        document.getElementById("hookBandFees").textContent = selectedPool === "wbtc" ?
-          v2Bands.neutralFavorableFee != null
-            ? `Nf ${v2Bands.neutralFavorableFee} | Nd ${v2Bands.neutralDefensiveFee} | Md ${v2Bands.mediumShortageDefensiveFee} | Sd ${v2Bands.severeShortageDefensiveFee}`
-            : "-" : "N/A";
-        document.getElementById("rangePolicy").textContent = selectedPool === "wbtc" ?
-          rebalancePolicy.rangeWidthBps != null
-            ? `width ${rebalancePolicy.rangeWidthBps} bps, shift ${rebalancePolicy.rangeShiftThresholdBps} bps`
-            : "-" : "N/A";
-
-        const warningCard = document.getElementById("warningCard");
-        const warningText = document.getElementById("warningText");
-        const warnings = [];
-        const ignorable = (msg) =>
-          !msg ||
-          msg.includes("not configured") ||
-          msg.includes("ETH pool not configured yet");
-        if (activity.hookTxFetchError) {
-          if (!ignorable(activity.hookTxFetchError)) warnings.push(`Hook tx fetch warning: ${activity.hookTxFetchError}`);
-        }
-        if (activity.poolSwapFetchError) {
-          if (!ignorable(activity.poolSwapFetchError)) warnings.push(`Pool swap fetch warning: ${activity.poolSwapFetchError}`);
-        }
-        if (activity.riskConfigFetchError) {
-          if (!ignorable(activity.riskConfigFetchError)) warnings.push(`Risk config fetch warning: ${activity.riskConfigFetchError}`);
-        }
-        if (activity.v2HookStateFetchError) {
-          if (!ignorable(activity.v2HookStateFetchError)) warnings.push(`V2 hook fetch warning: ${activity.v2HookStateFetchError}`);
-        }
-        if (risk.referenceSwapFetchError) {
-          warnings.push(`Reference pool fetch warning: ${risk.referenceSwapFetchError}`);
-        }
-        if (risk.inventorySkewFetchError) {
-          warnings.push(`Inventory skew fetch warning: ${risk.inventorySkewFetchError}`);
-        }
-        if (warnings.length > 0) {
-          warningCard.style.display = "block";
-          warningText.textContent = warnings.join(" | ");
-        } else {
-          warningCard.style.display = "none";
-          warningText.textContent = "";
+        if (!latest) {
+          ["ethPrice","positionValue","feesValue","netBenefit","ethWeight","inventoryImpact","feeApr","rangeStatus"].forEach((id) => setVal(id, "-"));
+          document.getElementById("rowsPerf").innerHTML = '<tr><td colspan="7">No ETH position snapshot yet.</td></tr>';
+          return;
         }
 
-        const status = statusText(activity.poolSwapCount || 0);
-        const statusEl = document.getElementById("poolStatus");
-        statusEl.textContent = status.text;
-        statusEl.className = `value small ${status.cls}`;
+        const price = Number(latest.priceUsdcPerEth || 0);
+        const pos = Number(latest.position?.valueUsd || 0);
+        const fees = Number(latest.feesUnclaimed?.valueUsd || 0);
+        const net = Number(latest.performance?.netBenefitUsd || 0);
+        const inv = Number(latest.performance?.inventoryImpactUsd || 0);
+        const weight = Number(latest.position?.ethWeightBps || 0) / 100;
+        const apr = computeApr(recent);
+        const range = latest.range || {};
 
-        const operatorNotes = document.getElementById("operatorNotes");
-        operatorNotes.innerHTML = "";
-        (operatorControl.notes || []).forEach((note) => {
-          const li = document.createElement("li");
-          li.textContent = note;
-          operatorNotes.appendChild(li);
+        setVal("ethPrice", usd(price));
+        setVal("positionValue", usd(pos));
+        setVal("feesValue", usd(fees));
+        setVal("netBenefit", usd(net, true), cls(net));
+        setVal("ethWeight", pct(weight));
+        setVal("inventoryImpact", usd(inv, true), cls(inv));
+        setVal("feeApr", apr == null ? "-" : `${apr.toFixed(2)}%`, apr == null ? "" : cls(apr));
+        setVal("rangeStatus", range.status || "-", range.status === "in-range" ? "good" : "warn");
+
+        document.getElementById("rangePrice").textContent =
+          `${usd(Number(range.priceLower || 0))} -> ${usd(Number(range.priceUpper || 0))}`;
+        document.getElementById("rangeTicks").textContent =
+          `${latest.tick ?? "-"} / ${latest.tickLower ?? "-"} / ${latest.tickUpper ?? "-"}`;
+        document.getElementById("distLower").textContent =
+          `${Number(range.tickDistanceToLower || 0)} ticks (${Number(range.distanceToLowerBps || 0).toFixed(1)} bps)`;
+        document.getElementById("distUpper").textContent =
+          `${Number(range.tickDistanceToUpper || 0)} ticks (${Number(range.distanceToUpperBps || 0).toFixed(1)} bps)`;
+
+        const rowsPerf = document.getElementById("rowsPerf");
+        rowsPerf.innerHTML = "";
+        [...recent].reverse().slice(0, 20).forEach((r) => {
+          const p = Number(r.priceUsdcPerEth || 0);
+          const pv = Number(r.position?.valueUsd || 0);
+          const fv = Number(r.feesUnclaimed?.valueUsd || 0);
+          const ni = Number(r.performance?.inventoryImpactUsd || 0);
+          const nb = Number(r.performance?.netBenefitUsd || 0);
+          const ew = Number(r.position?.ethWeightBps || 0) / 100;
+          rowsPerf.insertAdjacentHTML("beforeend", `
+            <tr>
+              <td>${r.timestamp || "-"}</td>
+              <td>${usd(p)}</td>
+              <td>${usd(pv)}</td>
+              <td>${usd(fv)}</td>
+              <td class="${cls(ni)}">${usd(ni, true)}</td>
+              <td class="${cls(nb)}">${usd(nb, true)}</td>
+              <td>${pct(ew)}</td>
+            </tr>
+          `);
         });
-        if (!operatorControl.notes || operatorControl.notes.length === 0) {
-          const li = document.createElement("li");
-          li.textContent = "Public dashboard is informational only.";
-          operatorNotes.appendChild(li);
-        }
+        if (!recent.length) rowsPerf.innerHTML = '<tr><td colspan="7">No trend history yet.</td></tr>';
 
-        const keeperRows = document.getElementById("keeperRows");
-        keeperRows.innerHTML = "";
-        (activity.recentKeeperUpdates || []).slice(0, 5).forEach((item) => {
-          keeperRows.appendChild(row(`
-            <td>${item.blockNumber}</td>
-            <td>${new Date((item.timeStamp || 0) * 1000).toISOString()}</td>
-            <td><a href="${txLink(item.hash)}" target="_blank" rel="noreferrer"><code>${short(item.hash)}</code></a></td>
-            <td><a href="${addrLink(item.from)}" target="_blank" rel="noreferrer"><code>${short(item.from)}</code></a></td>
-            <td>${item.gasUsed}</td>
-          `));
-        });
-        if (!activity.recentKeeperUpdates || activity.recentKeeperUpdates.length === 0) {
-          keeperRows.appendChild(row('<td colspan="5">No keeper updates found.</td>'));
-        }
+        const prices = recent.map((r) => Number(r.priceUsdcPerEth || 0)).filter(Number.isFinite);
+        const feesSeries = recent.map((r) => Number(r.feesUnclaimed?.valueUsd || 0)).filter(Number.isFinite);
+        const netSeries = recent.map((r) => Number(r.performance?.netBenefitUsd || 0)).filter(Number.isFinite);
+        drawSpark("sparkPrice", prices, "#58a6ff");
+        drawSpark("sparkFees", feesSeries, "#3fb950");
+        drawSpark("sparkNet", netSeries, "#d29922");
 
-        const swapRows = document.getElementById("swapRows");
-        swapRows.innerHTML = "";
-        (activity.recentPoolSwaps || []).slice(0, 5).forEach((item) => {
-          swapRows.appendChild(row(`
-            <td>${item.blockNumber}</td>
-            <td><a href="${txLink(item.transactionHash)}" target="_blank" rel="noreferrer"><code>${short(item.transactionHash)}</code></a></td>
-            <td><a href="${addrLink(item.sender)}" target="_blank" rel="noreferrer"><code>${short(item.sender)}</code></a></td>
-            <td>${item.amount0}</td>
-            <td>${item.amount1}</td>
-            <td>${item.fee}</td>
-            <td>${item.tick}</td>
-          `));
-        });
-        if (!activity.recentPoolSwaps || activity.recentPoolSwaps.length === 0) {
-          swapRows.appendChild(row('<td colspan="7">No recent pool swaps found in the current lookback window.</td>'));
-        }
+        document.getElementById("poolActivity").textContent =
+          `${ethPool.poolSwapCount ?? 0} swaps, ${ethPool.keeperUpdateCount ?? 0} keeper updates`;
 
-        const archiveRows = document.getElementById("nftArchiveRows");
-        archiveRows.innerHTML = "";
-        const archive = await loadArchive();
-        archive.forEach((item) => {
-          archiveRows.appendChild(row(`
-            <td>${item.timestamp || "-"}</td>
-            <td>${item.phase || "-"}</td>
-            <td><code>${item.tokenId ?? "-"}</code></td>
-            <td><code>${item.tickLower ?? "-"} / ${item.tickUpper ?? "-"}</code></td>
-            <td><code>${item.liquidity ?? "-"}</code></td>
-            <td>${item.txHash ? `<a href="${txLink(item.txHash)}" target="_blank" rel="noreferrer"><code>${short(item.txHash)}</code></a>` : "-"}</td>
-          `));
+        const rowsSwaps = document.getElementById("rowsSwaps");
+        rowsSwaps.innerHTML = "";
+        (ethPool.recentPoolSwaps || []).slice(0, 10).forEach((s) => {
+          rowsSwaps.insertAdjacentHTML("beforeend", `
+            <tr>
+              <td>${s.blockNumber}</td>
+              <td><a href="${txLink(s.transactionHash)}" target="_blank" rel="noreferrer"><code>${short(s.transactionHash)}</code></a></td>
+              <td><code>${short(s.sender)}</code></td>
+              <td>${s.amount0}</td>
+              <td>${s.amount1}</td>
+              <td>${s.tick}</td>
+            </tr>
+          `);
         });
-        if (archive.length === 0) {
-          archiveRows.appendChild(row('<td colspan="6">No archived snapshots yet.</td>'));
+        if (!ethPool.recentPoolSwaps || !ethPool.recentPoolSwaps.length) {
+          rowsSwaps.innerHTML = '<tr><td colspan="6">No recent swaps in current lookback.</td></tr>';
         }
       }
 
@@ -606,20 +300,15 @@
         const btn = document.getElementById("refreshBtn");
         btn.disabled = true;
         btn.textContent = "Refreshing…";
-        try {
-          await load();
-        } catch (err) {
-          document.getElementById("updated").textContent = `Refresh failed: ${err.message}`;
-        } finally {
-          btn.disabled = false;
-          btn.textContent = "Refresh";
-        }
+        try { await load(); }
+        catch (e) { document.getElementById("updated").textContent = `Refresh failed: ${e.message}`; }
+        finally { btn.disabled = false; btn.textContent = "Refresh"; }
       }
 
       document.getElementById("refreshBtn").addEventListener("click", refresh);
-      document.getElementById("poolSelect").addEventListener("change", refresh);
       refresh();
       setInterval(refresh, 60_000);
     </script>
   </body>
 </html>
+
