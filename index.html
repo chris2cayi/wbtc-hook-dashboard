@@ -3,217 +3,249 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ETH/USDC Control Tower</title>
+    <title>ETH/USDC Position Monitor</title>
     <style>
       :root {
-        --bg: #0d1117;
-        --panel: #161b22;
-        --muted: #8b949e;
-        --text: #e6edf3;
-        --line: #30363d;
-        --good: #3fb950;
-        --warn: #d29922;
-        --bad: #f85149;
-        --accent: #58a6ff;
+        --bg: #0c0f15;
+        --panel: #141923;
+        --line: #2b3344;
+        --text: #eef3ff;
+        --muted: #98a5bf;
+        --accent: #5ca9ff;
+        --good: #4cd17f;
+        --warn: #ffcb58;
+        --bad: #ff6f6f;
       }
       * { box-sizing: border-box; }
-      body { margin: 0; font-family: Inter, system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
-      .wrap { max-width: 1160px; margin: 0 auto; padding: 24px 16px 40px; }
-      .top { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+      body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, sans-serif; }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 16px 40px; }
+      .top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
       h1 { margin: 0; font-size: 28px; }
-      .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
-      .btn { border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 8px; padding: 10px 14px; cursor: pointer; }
-      .btn:hover { border-color: var(--accent); }
-      .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 12px; }
-      .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+      .sub { color: var(--muted); font-size: 13px; }
+      .btn { border:1px solid var(--line); background:var(--panel); color:var(--text); border-radius:8px; padding:10px 14px; cursor:pointer; }
+      .hero, .card, table { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+      .hero { padding: 14px; margin-bottom: 12px; }
+      .hero-top { display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:8px; }
+      .hero-price { font-size: 34px; font-weight: 800; }
+      .hero-note { color: var(--muted); font-size: 12px; }
+      .chart { width:100%; height:170px; margin-top:10px; background:#0f1420; border:1px solid var(--line); border-radius:10px; }
+      .range-wrap { margin-top: 10px; }
+      .range-bar { position: relative; height: 12px; background:#0f1420; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+      .range-fill { position:absolute; left:0; top:0; height:100%; width:0%; background:linear-gradient(90deg,#6de3a1 0%,#5ca9ff 100%); }
+      .range-marker { position:absolute; top:-4px; width:2px; height:20px; left:0%; background:#fff; }
+      .range-legend { display:flex; justify-content:space-between; color:var(--muted); font-size:12px; margin-top:6px; }
+      .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:10px; }
+      .card { padding:12px; }
       .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
-      .v { margin-top: 6px; font-size: 24px; font-weight: 700; }
-      .vs { margin-top: 6px; font-size: 16px; font-weight: 600; overflow-wrap: anywhere; }
+      .v { margin-top:6px; font-size:24px; font-weight:700; }
+      .vs { margin-top:6px; font-size:15px; font-weight:600; overflow-wrap:anywhere; }
       .good { color: var(--good); }
       .warn { color: var(--warn); }
       .bad { color: var(--bad); }
       .section { margin-top: 14px; }
-      .section h2 { margin: 0 0 8px; font-size: 18px; }
-      .hint { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
-      table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-      th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 12px; }
+      .section h2 { margin: 0 0 8px; font-size: 17px; }
+      table { width:100%; border-collapse:collapse; overflow:hidden; }
+      th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; font-size:12px; }
       th { color: var(--muted); font-weight: 600; }
-      tr:last-child td { border-bottom: 0; }
-      .spark { width: 100%; height: 70px; background: #0f141c; border: 1px solid var(--line); border-radius: 8px; }
-      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-      @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+      tr:last-child td { border-bottom:0; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; }
+      a { color: var(--accent); text-decoration:none; }
+      @media (max-width: 980px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+      @media (max-width: 560px) { .grid { grid-template-columns:1fr; } }
     </style>
   </head>
   <body>
     <div class="wrap">
       <div class="top">
         <div>
-          <h1>ETH/USDC Control Tower</h1>
+          <h1>ETH/USDC Position Monitor</h1>
           <div class="sub" id="updated">Loading…</div>
         </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <div class="sub">Auto refresh: 60s</div>
-          <button class="btn" id="refreshBtn">Refresh</button>
+        <button class="btn" id="refreshBtn">Refresh</button>
+      </div>
+
+      <div class="hero">
+        <div class="hero-top">
+          <div>
+            <div class="hero-note">Current Price</div>
+            <div class="hero-price" id="heroPrice">-</div>
+          </div>
+          <div>
+            <div class="hero-note">Range Status</div>
+            <div class="vs" id="heroStatus">-</div>
+          </div>
+        </div>
+        <svg class="chart" id="priceChart" viewBox="0 0 900 170" preserveAspectRatio="none"></svg>
+        <div class="range-wrap">
+          <div class="range-bar">
+            <div class="range-fill" id="rangeFill"></div>
+            <div class="range-marker" id="rangeMarker"></div>
+          </div>
+          <div class="range-legend">
+            <span id="rangeMin">Min -</span>
+            <span id="rangeNow">Now -</span>
+            <span id="rangeMax">Max -</span>
+          </div>
         </div>
       </div>
 
       <div class="grid">
-        <div class="card"><div class="k">ETH Price</div><div class="v" id="ethPrice">-</div></div>
         <div class="card"><div class="k">Position Value</div><div class="v" id="positionValue">-</div></div>
-        <div class="card"><div class="k">Unclaimed Fees</div><div class="v" id="feesValue">-</div></div>
-        <div class="card"><div class="k">Net Benefit vs Baseline</div><div class="v" id="netBenefit">-</div></div>
+        <div class="card"><div class="k">Fees (Unclaimed)</div><div class="v" id="feesValue">-</div></div>
+        <div class="card"><div class="k">Fee APR (Est)</div><div class="v" id="feeApr">-</div></div>
+        <div class="card"><div class="k">ETH Weight</div><div class="v" id="ethWeight">-</div></div>
       </div>
 
       <div class="grid">
-        <div class="card"><div class="k">ETH Weight</div><div class="v" id="ethWeight">-</div></div>
+        <div class="card"><div class="k">Net Benefit vs Baseline</div><div class="v" id="netBenefit">-</div></div>
         <div class="card"><div class="k">Inventory Impact</div><div class="v" id="inventoryImpact">-</div></div>
-        <div class="card"><div class="k">Estimated Fee APR (24h)</div><div class="v" id="feeApr">-</div></div>
-        <div class="card"><div class="k">Range Status</div><div class="v" id="rangeStatus">-</div></div>
+        <div class="card"><div class="k">Distance to Lower</div><div class="vs" id="distLower">-</div></div>
+        <div class="card"><div class="k">Distance to Upper</div><div class="vs" id="distUpper">-</div></div>
       </div>
 
       <div class="section">
-        <h2>Range & Tick Proximity</h2>
+        <h2>Contingency Backtest</h2>
         <div class="grid">
-          <div class="card"><div class="k">Range (Price)</div><div class="vs" id="rangePrice">-</div></div>
-          <div class="card"><div class="k">Current / Lower / Upper Tick</div><div class="vs" id="rangeTicks">-</div></div>
-          <div class="card"><div class="k">Distance To Lower</div><div class="vs" id="distLower">-</div></div>
-          <div class="card"><div class="k">Distance To Upper</div><div class="vs" id="distUpper">-</div></div>
+          <div class="card"><div class="k">Trigger</div><div class="vs" id="cbTrigger">-</div></div>
+          <div class="card"><div class="k">Estimated ETH Saved</div><div class="v" id="cbEthSaved">-</div></div>
+          <div class="card"><div class="k">Estimated Gas Cost</div><div class="v" id="cbGas">-</div></div>
+          <div class="card"><div class="k">Net Protection Alpha</div><div class="v" id="cbNet">-</div></div>
         </div>
       </div>
 
       <div class="section">
-        <h2>Evolution</h2>
+        <h2>ETH Flow Signal</h2>
         <div class="grid">
-          <div class="card">
-            <div class="k">Price Trend</div>
-            <svg class="spark" id="sparkPrice" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
-          </div>
-          <div class="card">
-            <div class="k">Fees Trend</div>
-            <svg class="spark" id="sparkFees" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
-          </div>
-          <div class="card">
-            <div class="k">Net Benefit Trend</div>
-            <svg class="spark" id="sparkNet" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
-          </div>
-          <div class="card">
-            <div class="k">Pool Activity (Lookback)</div>
-            <div class="vs" id="poolActivity">-</div>
-          </div>
+          <div class="card"><div class="k">Signal</div><div class="vs" id="flowSignal">-</div></div>
+          <div class="card"><div class="k">Current Sell ETH Share</div><div class="v" id="flowCurrentSell">-</div></div>
+          <div class="card"><div class="k">Previous Sell ETH Share</div><div class="v" id="flowPreviousSell">-</div></div>
+          <div class="card"><div class="k">Net ETH Into Pool</div><div class="v" id="flowNet">-</div></div>
         </div>
       </div>
 
       <div class="section">
-        <h2>Recent Snapshots</h2>
-        <div class="hint">Latest onchain snapshots used for control and execution decisions.</div>
+        <h2>Live Pool Activity</h2>
+        <div class="grid">
+          <div class="card"><div class="k">Pool ID</div><div class="vs"><code id="poolId">-</code></div></div>
+          <div class="card"><div class="k">Hook</div><div class="vs"><code id="hookAddr">-</code></div></div>
+          <div class="card"><div class="k">Swaps (lookback)</div><div class="v" id="swapCount">-</div></div>
+          <div class="card"><div class="k">Keeper Updates</div><div class="v" id="keeperCount">-</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Performance Log</h2>
         <table>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Price</th>
-              <th>Position</th>
-              <th>Fees</th>
-              <th>Inv. Impact</th>
-              <th>Net Benefit</th>
-              <th>ETH Weight</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Time</th><th>Price</th><th>Position</th><th>Fees</th><th>Inventory Impact</th><th>Net Benefit</th><th>ETH Weight</th></tr></thead>
           <tbody id="rowsPerf"></tbody>
         </table>
       </div>
 
       <div class="section">
-        <h2>Recent Pool Swaps</h2>
+        <h2>Recent Swaps</h2>
         <table>
-          <thead>
-            <tr>
-              <th>Block</th>
-              <th>Tx</th>
-              <th>Sender</th>
-              <th>amount0</th>
-              <th>amount1</th>
-              <th>Tick</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Block</th><th>Tx</th><th>Sender</th><th>amount0</th><th>amount1</th><th>Tick</th></tr></thead>
           <tbody id="rowsSwaps"></tbody>
         </table>
       </div>
     </div>
 
     <script>
+      const short = (v) => v ? `${v.slice(0, 6)}...${v.slice(-4)}` : "-";
       const txLink = (h) => `https://arbiscan.io/tx/${h}`;
-      const short = (v) => (v ? `${v.slice(0, 6)}...${v.slice(-4)}` : "-");
-      const usd = (n, sign = false) => {
-        if (!Number.isFinite(n)) return "-";
-        const p = `${sign && n > 0 ? "+" : ""}$${n.toFixed(2)}`;
-        return p;
-      };
+      const usd = (n, s=false) => Number.isFinite(n) ? `${s && n > 0 ? "+" : ""}$${n.toFixed(2)}` : "-";
       const pct = (n) => Number.isFinite(n) ? `${n.toFixed(2)}%` : "-";
-      const cls = (n) => (n > 0 ? "good" : n < 0 ? "bad" : "warn");
+      const cls = (n) => n > 0 ? "good" : n < 0 ? "bad" : "warn";
+      const set = (id, text) => { document.getElementById(id).textContent = text; };
+      const setV = (id, text, c="") => { const e=document.getElementById(id); e.textContent=text; e.className = `v ${c}`.trim(); };
 
-      function setVal(id, text, className = "") {
-        const el = document.getElementById(id);
-        el.textContent = text;
-        el.className = className ? `v ${className}` : "v";
-      }
-
-      function drawSpark(svgId, values, color) {
-        const svg = document.getElementById(svgId);
+      function drawChart(values) {
+        const svg = document.getElementById("priceChart");
         svg.innerHTML = "";
         if (!values || values.length < 2) return;
-        const w = 300, h = 70, pad = 6;
-        const min = Math.min(...values), max = Math.max(...values);
-        const span = max - min || 1;
-        const points = values.map((v, i) => {
-          const x = pad + (i * (w - pad * 2)) / (values.length - 1);
-          const y = h - pad - ((v - min) * (h - pad * 2)) / span;
-          return `${x},${y}`;
-        }).join(" ");
-        const poly = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
-        poly.setAttribute("fill", "none");
-        poly.setAttribute("stroke", color);
-        poly.setAttribute("stroke-width", "2");
-        poly.setAttribute("points", points);
-        svg.appendChild(poly);
+        const w=900,h=170,p=8,min=Math.min(...values),max=Math.max(...values),span=(max-min)||1;
+        const pts = values.map((v,i)=>`${p + i*(w-p*2)/(values.length-1)},${h-p-((v-min)*(h-p*2)/span)}`).join(" ");
+        const area = document.createElementNS("http://www.w3.org/2000/svg","polygon");
+        area.setAttribute("points",`${p},${h-p} ${pts} ${w-p},${h-p}`); area.setAttribute("fill","rgba(92,169,255,0.18)");
+        const line = document.createElementNS("http://www.w3.org/2000/svg","polyline");
+        line.setAttribute("points",pts); line.setAttribute("fill","none"); line.setAttribute("stroke","#5ca9ff"); line.setAttribute("stroke-width","2.2");
+        svg.appendChild(area); svg.appendChild(line);
       }
 
-      function computeApr(recent) {
+      function apr(recent) {
         if (!recent || recent.length < 2) return null;
-        const first = recent[0], last = recent[recent.length - 1];
-        const t0 = Date.parse(first.timestamp || "");
-        const t1 = Date.parse(last.timestamp || "");
-        if (!Number.isFinite(t0) || !Number.isFinite(t1) || t1 <= t0) return null;
-        const h = (t1 - t0) / 3_600_000;
-        if (h <= 0) return null;
-        const f0 = Number(first.feesUnclaimed?.valueUsd || 0);
-        const f1 = Number(last.feesUnclaimed?.valueUsd || 0);
-        const feeDelta = Math.max(0, f1 - f0);
-        const avgPos = (Number(first.position?.valueUsd || 0) + Number(last.position?.valueUsd || 0)) / 2;
-        if (avgPos <= 0) return null;
-        return (feeDelta / avgPos) * (24 / h) * 365 * 100;
+        const a=recent[0], b=recent[recent.length-1];
+        const t0=Date.parse(a.timestamp||""), t1=Date.parse(b.timestamp||"");
+        if (!Number.isFinite(t0)||!Number.isFinite(t1)||t1<=t0) return null;
+        const h=(t1-t0)/3600000, f0=Number(a.feesUnclaimed?.valueUsd||0), f1=Number(b.feesUnclaimed?.valueUsd||0);
+        const pos=(Number(a.position?.valueUsd||0)+Number(b.position?.valueUsd||0))/2;
+        if (h<=0 || pos<=0) return null;
+        return (Math.max(0,f1-f0)/pos)*(24/h)*365*100;
       }
 
-      async function loadJson(path) {
-        const r = await fetch(`${path}?ts=${Date.now()}`, { cache: "no-store" });
-        if (!r.ok) throw new Error(`${path} ${r.status}`);
-        return r.json();
+      function contingencyBacktest(recent) {
+        const TRIGGER_BPS = 3000;
+        const CONFIRM_CHECKS = 2;
+        const PARTIAL_PULL_RATIO = 0.65; // estimate
+        const GAS_PULL_USD = 0.12; // conservative arb estimate
+        const GAS_READD_USD = 0.18; // conservative arb estimate
+        if (!recent || recent.length < 4) return null;
+
+        const ordered = [...recent]; // oldest -> newest
+        let hitIdx = -1;
+        let streak = 0;
+        for (let i = 0; i < ordered.length; i++) {
+          const w = Number(ordered[i].position?.ethWeightBps || 0);
+          if (w < TRIGGER_BPS) streak += 1; else streak = 0;
+          if (streak >= CONFIRM_CHECKS) {
+            hitIdx = i;
+            break;
+          }
+        }
+        if (hitIdx < 0) return { trigger: "No trigger hit", ethSaved: 0, gas: 0, net: 0 };
+
+        const at = ordered[hitIdx];
+        const end = ordered[ordered.length - 1];
+        const price = Number(end.priceUsdcPerEth || at.priceUsdcPerEth || 0);
+        const ethAt = Number(at.position?.eth || 0);
+        const ethEnd = Number(end.position?.eth || 0);
+        const rawLoss = Math.max(0, ethAt - ethEnd);
+        const ethSaved = rawLoss * PARTIAL_PULL_RATIO;
+        const usdSaved = ethSaved * price;
+        const gas = GAS_PULL_USD + GAS_READD_USD;
+        const net = usdSaved - gas;
+        return {
+          trigger: `${new Date(at.timestamp || "").toISOString()} @ ${(Number(at.position?.ethWeightBps || 0) / 100).toFixed(2)}% ETH`,
+          ethSaved,
+          gas,
+          net,
+        };
       }
 
-      async function load() {
-        const activity = await loadJson("./activity.json");
+      async function j(path){ const r=await fetch(`${path}?ts=${Date.now()}`,{cache:"no-store"}); if(!r.ok) throw new Error(`${path} ${r.status}`); return r.json(); }
+
+      async function load(){
+        const activity = await j("./activity.json");
         const perf = activity.ethPositionPerformance || {};
         const latest = perf.latest || null;
         const recent = perf.recent || [];
-        const ethPool = activity.pools?.eth?.poolActivity || {};
+        const pool = activity.pools?.eth?.poolActivity || activity.poolActivity || {};
+        const flow = activity.ethFlowSignal || {};
 
-        document.getElementById("updated").textContent = `Last publish: ${activity.generatedAtUtc || "-"} UTC`;
+        set("updated", `Last publish: ${activity.generatedAtUtc || "-"} UTC`);
+        set("poolId", pool.poolId || "-");
+        set("hookAddr", pool.hookAddress || "-");
+        setV("swapCount", String(pool.poolSwapCount ?? 0));
+        setV("keeperCount", String(pool.keeperUpdateCount ?? 0));
+        set("flowSignal", flow.reason || "-");
+        setV("flowCurrentSell", pct(Number(flow.flowCurrentSellEthShareBps || 0) / 100));
+        setV("flowPreviousSell", pct(Number(flow.flowPreviousSellEthShareBps || 0) / 100));
+        setV("flowNet", `${Number(flow.flowNetEthInBps || 0).toFixed(0)} bps`, Number(flow.flowNetEthInBps || 0) > 0 ? "good" : "warn");
 
         if (!latest) {
-          ["ethPrice","positionValue","feesValue","netBenefit","ethWeight","inventoryImpact","feeApr","rangeStatus"].forEach((id) => setVal(id, "-"));
-          document.getElementById("rowsPerf").innerHTML = '<tr><td colspan="7">No ETH position snapshot yet.</td></tr>';
+          ["heroPrice","heroStatus","positionValue","feesValue","feeApr","ethWeight","netBenefit","inventoryImpact","distLower","distUpper"].forEach((id)=>set(id,"-"));
+          document.getElementById("rowsPerf").innerHTML = '<tr><td colspan="7">No ETH performance snapshot yet.</td></tr>';
+          document.getElementById("rowsSwaps").innerHTML = '<tr><td colspan="6">No swaps yet.</td></tr>';
           return;
         }
 
@@ -223,92 +255,66 @@
         const net = Number(latest.performance?.netBenefitUsd || 0);
         const inv = Number(latest.performance?.inventoryImpactUsd || 0);
         const weight = Number(latest.position?.ethWeightBps || 0) / 100;
-        const apr = computeApr(recent);
+        const a = apr(recent);
         const range = latest.range || {};
 
-        setVal("ethPrice", usd(price));
-        setVal("positionValue", usd(pos));
-        setVal("feesValue", usd(fees));
-        setVal("netBenefit", usd(net, true), cls(net));
-        setVal("ethWeight", pct(weight));
-        setVal("inventoryImpact", usd(inv, true), cls(inv));
-        setVal("feeApr", apr == null ? "-" : `${apr.toFixed(2)}%`, apr == null ? "" : cls(apr));
-        setVal("rangeStatus", range.status || "-", range.status === "in-range" ? "good" : "warn");
+        set("heroPrice", usd(price));
+        set("heroStatus", range.status || "-");
+        setV("positionValue", usd(pos));
+        setV("feesValue", usd(fees));
+        setV("feeApr", a==null?"-":`${a.toFixed(2)}%`, a==null?"":cls(a));
+        setV("ethWeight", pct(weight));
+        setV("netBenefit", usd(net,true), cls(net));
+        setV("inventoryImpact", usd(inv,true), cls(inv));
+        set("distLower", `${Number(range.tickDistanceToLower || 0)} ticks (${Number(range.distanceToLowerBps || 0).toFixed(1)} bps)`);
+        set("distUpper", `${Number(range.tickDistanceToUpper || 0)} ticks (${Number(range.distanceToUpperBps || 0).toFixed(1)} bps)`);
 
-        document.getElementById("rangePrice").textContent =
-          `${usd(Number(range.priceLower || 0))} -> ${usd(Number(range.priceUpper || 0))}`;
-        document.getElementById("rangeTicks").textContent =
-          `${latest.tick ?? "-"} / ${latest.tickLower ?? "-"} / ${latest.tickUpper ?? "-"}`;
-        document.getElementById("distLower").textContent =
-          `${Number(range.tickDistanceToLower || 0)} ticks (${Number(range.distanceToLowerBps || 0).toFixed(1)} bps)`;
-        document.getElementById("distUpper").textContent =
-          `${Number(range.tickDistanceToUpper || 0)} ticks (${Number(range.distanceToUpperBps || 0).toFixed(1)} bps)`;
+        const pLow=Number(range.priceLower||0), pHigh=Number(range.priceUpper||0), pNow=price;
+        const d=(pHigh-pLow)||1; let x=((pNow-pLow)/d)*100; x=Math.max(0,Math.min(100,x));
+        document.getElementById("rangeFill").style.width=`${x}%`;
+        document.getElementById("rangeMarker").style.left=`${x}%`;
+        set("rangeMin", `Min ${usd(pLow)}`); set("rangeNow", `Now ${usd(pNow)}`); set("rangeMax", `Max ${usd(pHigh)}`);
+
+        const prices = recent.map(r=>Number(r.priceUsdcPerEth||0)).filter(Number.isFinite);
+        drawChart(prices);
 
         const rowsPerf = document.getElementById("rowsPerf");
         rowsPerf.innerHTML = "";
-        [...recent].reverse().slice(0, 20).forEach((r) => {
-          const p = Number(r.priceUsdcPerEth || 0);
-          const pv = Number(r.position?.valueUsd || 0);
-          const fv = Number(r.feesUnclaimed?.valueUsd || 0);
-          const ni = Number(r.performance?.inventoryImpactUsd || 0);
-          const nb = Number(r.performance?.netBenefitUsd || 0);
-          const ew = Number(r.position?.ethWeightBps || 0) / 100;
-          rowsPerf.insertAdjacentHTML("beforeend", `
-            <tr>
-              <td>${r.timestamp || "-"}</td>
-              <td>${usd(p)}</td>
-              <td>${usd(pv)}</td>
-              <td>${usd(fv)}</td>
-              <td class="${cls(ni)}">${usd(ni, true)}</td>
-              <td class="${cls(nb)}">${usd(nb, true)}</td>
-              <td>${pct(ew)}</td>
-            </tr>
-          `);
+        [...recent].reverse().slice(0, 25).forEach(r=>{
+          const p=Number(r.priceUsdcPerEth||0), pv=Number(r.position?.valueUsd||0), fv=Number(r.feesUnclaimed?.valueUsd||0), ni=Number(r.performance?.inventoryImpactUsd||0), nb=Number(r.performance?.netBenefitUsd||0), ew=Number(r.position?.ethWeightBps||0)/100;
+          rowsPerf.insertAdjacentHTML("beforeend", `<tr><td>${r.timestamp||"-"}</td><td>${usd(p)}</td><td>${usd(pv)}</td><td>${usd(fv)}</td><td class="${cls(ni)}">${usd(ni,true)}</td><td class="${cls(nb)}">${usd(nb,true)}</td><td>${pct(ew)}</td></tr>`);
         });
         if (!recent.length) rowsPerf.innerHTML = '<tr><td colspan="7">No trend history yet.</td></tr>';
 
-        const prices = recent.map((r) => Number(r.priceUsdcPerEth || 0)).filter(Number.isFinite);
-        const feesSeries = recent.map((r) => Number(r.feesUnclaimed?.valueUsd || 0)).filter(Number.isFinite);
-        const netSeries = recent.map((r) => Number(r.performance?.netBenefitUsd || 0)).filter(Number.isFinite);
-        drawSpark("sparkPrice", prices, "#58a6ff");
-        drawSpark("sparkFees", feesSeries, "#3fb950");
-        drawSpark("sparkNet", netSeries, "#d29922");
-
-        document.getElementById("poolActivity").textContent =
-          `${ethPool.poolSwapCount ?? 0} swaps, ${ethPool.keeperUpdateCount ?? 0} keeper updates`;
-
         const rowsSwaps = document.getElementById("rowsSwaps");
         rowsSwaps.innerHTML = "";
-        (ethPool.recentPoolSwaps || []).slice(0, 10).forEach((s) => {
-          rowsSwaps.insertAdjacentHTML("beforeend", `
-            <tr>
-              <td>${s.blockNumber}</td>
-              <td><a href="${txLink(s.transactionHash)}" target="_blank" rel="noreferrer"><code>${short(s.transactionHash)}</code></a></td>
-              <td><code>${short(s.sender)}</code></td>
-              <td>${s.amount0}</td>
-              <td>${s.amount1}</td>
-              <td>${s.tick}</td>
-            </tr>
-          `);
+        (pool.recentPoolSwaps || []).slice(0,10).forEach(s=>{
+          rowsSwaps.insertAdjacentHTML("beforeend", `<tr><td>${s.blockNumber}</td><td><a href="${txLink(s.transactionHash)}" target="_blank" rel="noreferrer"><code>${short(s.transactionHash)}</code></a></td><td><code>${short(s.sender)}</code></td><td>${s.amount0}</td><td>${s.amount1}</td><td>${s.tick}</td></tr>`);
         });
-        if (!ethPool.recentPoolSwaps || !ethPool.recentPoolSwaps.length) {
-          rowsSwaps.innerHTML = '<tr><td colspan="6">No recent swaps in current lookback.</td></tr>';
+        if (!(pool.recentPoolSwaps||[]).length) rowsSwaps.innerHTML = '<tr><td colspan="6">No recent swaps in lookback.</td></tr>';
+
+        const cb = contingencyBacktest(recent);
+        if (!cb) {
+          set("cbTrigger", "-");
+          setV("cbEthSaved", "-");
+          setV("cbGas", "-");
+          setV("cbNet", "-");
+        } else {
+          set("cbTrigger", cb.trigger);
+          setV("cbEthSaved", cb.ethSaved > 0 ? `${cb.ethSaved.toFixed(5)} ETH` : "0 ETH", cb.ethSaved > 0 ? "good" : "warn");
+          setV("cbGas", usd(cb.gas), "warn");
+          setV("cbNet", usd(cb.net, true), cls(cb.net));
         }
       }
 
-      async function refresh() {
-        const btn = document.getElementById("refreshBtn");
-        btn.disabled = true;
-        btn.textContent = "Refreshing…";
-        try { await load(); }
-        catch (e) { document.getElementById("updated").textContent = `Refresh failed: ${e.message}`; }
-        finally { btn.disabled = false; btn.textContent = "Refresh"; }
+      async function refresh(){
+        const b=document.getElementById("refreshBtn"); b.disabled=true; b.textContent="Refreshing…";
+        try { await load(); } catch(e){ set("updated", `Refresh failed: ${e.message}`); }
+        finally { b.disabled=false; b.textContent="Refresh"; }
       }
-
       document.getElementById("refreshBtn").addEventListener("click", refresh);
       refresh();
       setInterval(refresh, 60_000);
     </script>
   </body>
 </html>
-
