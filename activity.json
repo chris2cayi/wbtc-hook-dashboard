@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-06T20:39:45+00:00",
+  "generatedAtUtc": "2026-05-06T22:02:34+00:00",
   "activePool": "eth",
   "pools": {
     "eth": {
@@ -8,8 +8,8 @@
         "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
         "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
         "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-        "latestBlock": 460099259,
-        "poolSwapLookbackStartBlock": 460098759,
+        "latestBlock": 460118964,
+        "poolSwapLookbackStartBlock": 460118464,
         "recentKeeperUpdates": [
           {
             "blockNumber": 459137090,
@@ -86,63 +86,107 @@
         ],
         "recentPoolSwaps": [
           {
-            "blockNumber": 460099010,
-            "transactionHash": "0x5223decb0bf6f37426e003681a552231c2e1cf603ec956e1ec265422aed2a3bd",
+            "blockNumber": 460118593,
+            "transactionHash": "0x2d2db0c3357ee1d4227ce08d622848898113f9298ae3a4257cfbe35e59e5f3c9",
             "sender": "0x6a6255a9bbffb9a273c5b0871e28f52b65763978",
-            "amount0": -1393553465634211284,
-            "amount1": 3269662127,
-            "sqrtPriceX96": 3838510782761519000000000,
-            "liquidity": 974327105902827069,
-            "tick": -198710,
+            "amount0": -803198439107546318,
+            "amount1": 1889938000,
+            "sqrtPriceX96": 3844079622535073000000000,
+            "liquidity": 1036468393999797197,
+            "tick": -198681,
             "fee": 500
           },
           {
-            "blockNumber": 460099011,
-            "transactionHash": "0xba7d522fd0efc2f914242c28afbb30998a06d882205e68cdb7bf3f40dc4d0563",
-            "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
-            "amount0": -907941472057299624,
-            "amount1": 2130037673,
-            "sqrtPriceX96": 3838336389099261666525184,
-            "liquidity": 967596393698924032,
-            "tick": -198711,
-            "fee": 500
-          },
-          {
-            "blockNumber": 460099011,
-            "transactionHash": "0x07a561cbe25cda7c82c1a4033f51862f2c2137b831c82f2e96bd78c04d451853",
-            "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
-            "amount0": -18218851412496739,
-            "amount1": 42739584,
-            "sqrtPriceX96": 3838332889521579523833856,
-            "liquidity": 967596393698924032,
-            "tick": -198711,
-            "fee": 500
-          },
-          {
-            "blockNumber": 460099012,
-            "transactionHash": "0xe2c21c03960d713dbe7dc7da9649618d0a4604e73a3f801ba91b9a01047411c3",
-            "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
-            "amount0": -18125433391430486,
-            "amount1": 42520357,
-            "sqrtPriceX96": 3838329407894479655927808,
-            "liquidity": 967596393698924032,
-            "tick": -198711,
-            "fee": 500
-          },
-          {
-            "blockNumber": 460099070,
-            "transactionHash": "0x4b4bfbb8224835a71313b4480e93fdffaf94ceff711abfed62136a17b166580e",
+            "blockNumber": 460118617,
+            "transactionHash": "0xac9af98e430f52309db555c3cf79e63b16d65a2c3ea1257cc3cf60ab6f54b4a0",
             "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
-            "amount0": -571953430651634212,
-            "amount1": 1341702894,
-            "sqrtPriceX96": 3838219547362096186392576,
-            "liquidity": 967596393698924032,
-            "tick": -198712,
+            "amount0": -504886263382859711,
+            "amount1": 1187932258,
+            "sqrtPriceX96": 3843988816398965963614448,
+            "liquidity": 1036468393999797197,
+            "tick": -198682,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118618,
+            "transactionHash": "0x5e5a0045aec19b6e9479ba9a83ba3929e24d4c0ed85a8f8e5ea4d76845b51793",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": -718966860458388864,
+            "amount1": 1691539430,
+            "sqrtPriceX96": 3843859514278717088081735,
+            "liquidity": 1036468393999797197,
+            "tick": -198683,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118650,
+            "transactionHash": "0x827509d4b71555e247cf60f09e679d8c346d71223adcb94dc12df1f45fca79dd",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": -620616901676147061,
+            "amount1": 1460056402,
+            "sqrtPriceX96": 3843747906836933648580608,
+            "liquidity": 1036468393999797197,
+            "tick": -198683,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118836,
+            "transactionHash": "0x447c8f295b6455c3cd30a2d5f06c1a625404246445cb0842325985bbc63f15bf",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": -622591346883980112,
+            "amount1": 1464616271,
+            "sqrtPriceX96": 3843635950836482838626304,
+            "liquidity": 1036468393999797197,
+            "tick": -198684,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118868,
+            "transactionHash": "0x5e3420b4c32a8f3f6adbe2a8ae8723a16b6b3bb99bbaf75d1caea2876b96fda7",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": -600401920071256184,
+            "amount1": 1412335899,
+            "sqrtPriceX96": 3843527991173800429355008,
+            "liquidity": 1036468393999797197,
+            "tick": -198684,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118868,
+            "transactionHash": "0x66bb6d9c5ff2af2b95bc9a64a810d611082308cab45d161f2335a78e7bfc95c9",
+            "sender": "0x6a6255a9bbffb9a273c5b0871e28f52b65763978",
+            "amount0": -255927244277108719,
+            "amount1": 601997999,
+            "sqrtPriceX96": 3843481974145565400000000,
+            "liquidity": 1036468393999797197,
+            "tick": -198685,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118868,
+            "transactionHash": "0x0758d2216d48df5bf1fcca99cd36c396bf320b9c4f57db702b62dbc6f767f881",
+            "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
+            "amount0": -240263892129943525,
+            "amount1": 565141181,
+            "sqrtPriceX96": 3843438774470986363305984,
+            "liquidity": 1036468393999797197,
+            "tick": -198685,
+            "fee": 500
+          },
+          {
+            "blockNumber": 460118869,
+            "transactionHash": "0xe338b2f42e6e160bf9227c4334080b917cefaa0225d9b70dafb5953fe16c1e1e",
+            "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+            "amount0": -500435321609868032,
+            "amount1": 1177067459,
+            "sqrtPriceX96": 3843348798845554788401850,
+            "liquidity": 1036468393999797197,
+            "tick": -198685,
             "fee": 500
           }
         ],
         "keeperUpdateCount": 9,
-        "poolSwapCount": 5,
+        "poolSwapCount": 9,
         "hookTxFetchError": null,
         "poolSwapFetchError": null,
         "riskConfigFetchError": null,
@@ -174,8 +218,8 @@
     "hookAddress": "0x50890816af79c26F876355306BfFFC86e9439080",
     "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
     "poolManager": "0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32",
-    "latestBlock": 460099259,
-    "poolSwapLookbackStartBlock": 460098759,
+    "latestBlock": 460118964,
+    "poolSwapLookbackStartBlock": 460118464,
     "recentKeeperUpdates": [
       {
         "blockNumber": 459137090,
@@ -252,63 +296,107 @@
     ],
     "recentPoolSwaps": [
       {
-        "blockNumber": 460099010,
-        "transactionHash": "0x5223decb0bf6f37426e003681a552231c2e1cf603ec956e1ec265422aed2a3bd",
+        "blockNumber": 460118593,
+        "transactionHash": "0x2d2db0c3357ee1d4227ce08d622848898113f9298ae3a4257cfbe35e59e5f3c9",
         "sender": "0x6a6255a9bbffb9a273c5b0871e28f52b65763978",
-        "amount0": -1393553465634211284,
-        "amount1": 3269662127,
-        "sqrtPriceX96": 3838510782761519000000000,
-        "liquidity": 974327105902827069,
-        "tick": -198710,
+        "amount0": -803198439107546318,
+        "amount1": 1889938000,
+        "sqrtPriceX96": 3844079622535073000000000,
+        "liquidity": 1036468393999797197,
+        "tick": -198681,
         "fee": 500
       },
       {
-        "blockNumber": 460099011,
-        "transactionHash": "0xba7d522fd0efc2f914242c28afbb30998a06d882205e68cdb7bf3f40dc4d0563",
-        "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
-        "amount0": -907941472057299624,
-        "amount1": 2130037673,
-        "sqrtPriceX96": 3838336389099261666525184,
-        "liquidity": 967596393698924032,
-        "tick": -198711,
-        "fee": 500
-      },
-      {
-        "blockNumber": 460099011,
-        "transactionHash": "0x07a561cbe25cda7c82c1a4033f51862f2c2137b831c82f2e96bd78c04d451853",
-        "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
-        "amount0": -18218851412496739,
-        "amount1": 42739584,
-        "sqrtPriceX96": 3838332889521579523833856,
-        "liquidity": 967596393698924032,
-        "tick": -198711,
-        "fee": 500
-      },
-      {
-        "blockNumber": 460099012,
-        "transactionHash": "0xe2c21c03960d713dbe7dc7da9649618d0a4604e73a3f801ba91b9a01047411c3",
-        "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
-        "amount0": -18125433391430486,
-        "amount1": 42520357,
-        "sqrtPriceX96": 3838329407894479655927808,
-        "liquidity": 967596393698924032,
-        "tick": -198711,
-        "fee": 500
-      },
-      {
-        "blockNumber": 460099070,
-        "transactionHash": "0x4b4bfbb8224835a71313b4480e93fdffaf94ceff711abfed62136a17b166580e",
+        "blockNumber": 460118617,
+        "transactionHash": "0xac9af98e430f52309db555c3cf79e63b16d65a2c3ea1257cc3cf60ab6f54b4a0",
         "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
-        "amount0": -571953430651634212,
-        "amount1": 1341702894,
-        "sqrtPriceX96": 3838219547362096186392576,
-        "liquidity": 967596393698924032,
-        "tick": -198712,
+        "amount0": -504886263382859711,
+        "amount1": 1187932258,
+        "sqrtPriceX96": 3843988816398965963614448,
+        "liquidity": 1036468393999797197,
+        "tick": -198682,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118618,
+        "transactionHash": "0x5e5a0045aec19b6e9479ba9a83ba3929e24d4c0ed85a8f8e5ea4d76845b51793",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -718966860458388864,
+        "amount1": 1691539430,
+        "sqrtPriceX96": 3843859514278717088081735,
+        "liquidity": 1036468393999797197,
+        "tick": -198683,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118650,
+        "transactionHash": "0x827509d4b71555e247cf60f09e679d8c346d71223adcb94dc12df1f45fca79dd",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -620616901676147061,
+        "amount1": 1460056402,
+        "sqrtPriceX96": 3843747906836933648580608,
+        "liquidity": 1036468393999797197,
+        "tick": -198683,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118836,
+        "transactionHash": "0x447c8f295b6455c3cd30a2d5f06c1a625404246445cb0842325985bbc63f15bf",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -622591346883980112,
+        "amount1": 1464616271,
+        "sqrtPriceX96": 3843635950836482838626304,
+        "liquidity": 1036468393999797197,
+        "tick": -198684,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118868,
+        "transactionHash": "0x5e3420b4c32a8f3f6adbe2a8ae8723a16b6b3bb99bbaf75d1caea2876b96fda7",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -600401920071256184,
+        "amount1": 1412335899,
+        "sqrtPriceX96": 3843527991173800429355008,
+        "liquidity": 1036468393999797197,
+        "tick": -198684,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118868,
+        "transactionHash": "0x66bb6d9c5ff2af2b95bc9a64a810d611082308cab45d161f2335a78e7bfc95c9",
+        "sender": "0x6a6255a9bbffb9a273c5b0871e28f52b65763978",
+        "amount0": -255927244277108719,
+        "amount1": 601997999,
+        "sqrtPriceX96": 3843481974145565400000000,
+        "liquidity": 1036468393999797197,
+        "tick": -198685,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118868,
+        "transactionHash": "0x0758d2216d48df5bf1fcca99cd36c396bf320b9c4f57db702b62dbc6f767f881",
+        "sender": "0x2f5ea801cdb6ac9aa7fba3d288491def251b7f7e",
+        "amount0": -240263892129943525,
+        "amount1": 565141181,
+        "sqrtPriceX96": 3843438774470986363305984,
+        "liquidity": 1036468393999797197,
+        "tick": -198685,
+        "fee": 500
+      },
+      {
+        "blockNumber": 460118869,
+        "transactionHash": "0xe338b2f42e6e160bf9227c4334080b917cefaa0225d9b70dafb5953fe16c1e1e",
+        "sender": "0x93c30e6e09f698cfea99b09b5166ed90cfaedd17",
+        "amount0": -500435321609868032,
+        "amount1": 1177067459,
+        "sqrtPriceX96": 3843348798845554788401850,
+        "liquidity": 1036468393999797197,
+        "tick": -198685,
         "fee": 500
       }
     ],
     "keeperUpdateCount": 9,
-    "poolSwapCount": 5,
+    "poolSwapCount": 9,
     "hookTxFetchError": null,
     "poolSwapFetchError": null,
     "riskConfigFetchError": null,
@@ -338,17 +426,17 @@
     "available": true,
     "reason": "Flow signal computed",
     "current": {
-      "swapCount": 3,
+      "swapCount": 5,
       "ethInWei": 0,
-      "ethOutWei": 608297715455561437,
+      "ethOutWei": 2219619724972156572,
       "sellEthShareBps": 0,
       "buyEthShareBps": 10000,
       "netEthInBps": -10000
     },
     "previous": {
-      "swapCount": 2,
+      "swapCount": 4,
       "ethInWei": 0,
-      "ethOutWei": 2301494937691510908,
+      "ethOutWei": 2647668464624941954,
       "sellEthShareBps": 0,
       "buyEthShareBps": 10000,
       "netEthInBps": -10000
@@ -363,21 +451,21 @@
   },
   "ethPositionPerformance": {
     "latest": {
-      "timestamp": "2026-05-06T20:39:45Z",
+      "timestamp": "2026-05-06T22:02:34Z",
       "tokenId": 167294,
       "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
-      "tick": -198712,
+      "tick": -198685,
       "tickLower": -199210,
       "tickUpper": -198410,
-      "priceUsdcPerEth": 2346.931739325232,
+      "priceUsdcPerEth": 2353.2086323080166,
       "range": {
         "status": "in-range",
         "priceLower": 2232.8120958031477,
         "priceUpper": 2418.7667934901838,
-        "tickDistanceToLower": 498,
-        "tickDistanceToUpper": 302,
-        "distanceToLowerBps": 511.1027647001128,
-        "distanceToUpperBps": 306.0807136453198
+        "tickDistanceToLower": 525,
+        "tickDistanceToUpper": 275,
+        "distanceToLowerBps": 539.2148167379125,
+        "distanceToUpperBps": 278.59051799358747
       },
       "position": {
         "eth": 0.0,
@@ -400,10 +488,10 @@
       },
       "performance": {
         "baselineTimestamp": "2026-05-04T21:37:32Z",
-        "holdValueUsdAtCurrentPrice": 661.3295232873065,
-        "inventoryImpactUsd": -661.3295232873065,
+        "holdValueUsdAtCurrentPrice": 661.8630515522613,
+        "inventoryImpactUsd": -661.8630515522613,
         "feesValueUsd": 0.0,
-        "netBenefitUsd": -661.3295232873065
+        "netBenefitUsd": -661.8630515522613
       }
     },
     "recent": [
@@ -1323,6 +1411,50 @@
           "inventoryImpactUsd": -661.3295232873065,
           "feesValueUsd": 0.0,
           "netBenefitUsd": -661.3295232873065
+        }
+      },
+      {
+        "timestamp": "2026-05-06T22:02:34Z",
+        "tokenId": 167294,
+        "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
+        "tick": -198685,
+        "tickLower": -199210,
+        "tickUpper": -198410,
+        "priceUsdcPerEth": 2353.2086323080166,
+        "range": {
+          "status": "in-range",
+          "priceLower": 2232.8120958031477,
+          "priceUpper": 2418.7667934901838,
+          "tickDistanceToLower": 525,
+          "tickDistanceToUpper": 275,
+          "distanceToLowerBps": 539.2148167379125,
+          "distanceToUpperBps": 278.59051799358747
+        },
+        "position": {
+          "eth": 0.0,
+          "usdc": 0.0,
+          "valueUsd": 0.0,
+          "ethWeightBps": 0
+        },
+        "feesUnclaimed": {
+          "eth": 0.0,
+          "usdc": 0.0,
+          "valueUsd": 0.0
+        },
+        "totalValueUsd": 0.0,
+        "wallet": {
+          "address": "0x3A4b297C3CbD477525aE13EE6C8929Bd34397Af3",
+          "ethRaw": "5358937308484450",
+          "eth": 0.00535893730848445,
+          "usdcRaw": "6890632",
+          "usdc": 6.890632
+        },
+        "performance": {
+          "baselineTimestamp": "2026-05-04T21:37:32Z",
+          "holdValueUsdAtCurrentPrice": 661.8630515522613,
+          "inventoryImpactUsd": -661.8630515522613,
+          "feesValueUsd": 0.0,
+          "netBenefitUsd": -661.8630515522613
         }
       }
     ]
