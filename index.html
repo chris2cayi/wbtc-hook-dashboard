@@ -18,7 +18,7 @@
       }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, sans-serif; }
-      .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 16px 40px; }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 18px 14px 32px; }
       .top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
       h1 { margin: 0; font-size: 28px; }
       .sub { color: var(--muted); font-size: 13px; }
@@ -26,7 +26,7 @@
       .hero, .card, table { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
       .hero { padding: 14px; margin-bottom: 12px; }
       .hero-top { display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:8px; }
-      .hero-price { font-size: 34px; font-weight: 800; }
+      .hero-price { font-size: 34px; font-weight: 800; line-height: 1.1; }
       .hero-note { color: var(--muted); font-size: 12px; }
       .chart { width:100%; height:170px; margin-top:10px; background:#0f1420; border:1px solid var(--line); border-radius:10px; }
       .range-wrap { margin-top: 10px; }
@@ -44,14 +44,30 @@
       .bad { color: var(--bad); }
       .section { margin-top: 14px; }
       .section h2 { margin: 0 0 8px; font-size: 17px; }
+      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
       table { width:100%; border-collapse:collapse; overflow:hidden; }
       th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; font-size:12px; }
       th { color: var(--muted); font-weight: 600; }
       tr:last-child td { border-bottom:0; }
       code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; }
       a { color: var(--accent); text-decoration:none; }
-      @media (max-width: 980px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-      @media (max-width: 560px) { .grid { grid-template-columns:1fr; } }
+      @media (max-width: 980px) {
+        .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      }
+      @media (max-width: 560px) {
+        .wrap { padding: 14px 10px 24px; }
+        h1 { font-size: 22px; }
+        .sub { font-size: 12px; }
+        .btn { padding: 8px 12px; border-radius: 8px; }
+        .hero { padding: 10px; }
+        .hero-price { font-size: 28px; }
+        .chart { height: 140px; }
+        .grid { grid-template-columns:1fr; gap: 8px; }
+        .card { padding: 10px; }
+        .v { font-size: 21px; }
+        .vs { font-size: 14px; }
+        th, td { padding: 8px 8px; font-size: 11px; white-space: nowrap; }
+      }
     </style>
   </head>
   <body>
@@ -60,6 +76,7 @@
         <div>
           <h1>ETH/USDC Position Monitor</h1>
           <div class="sub" id="updated">Loading…</div>
+          <div class="sub">Active Position: <a id="activePosLink" href="#" target="_blank" rel="noreferrer">-</a></div>
         </div>
         <button class="btn" id="refreshBtn">Refresh</button>
       </div>
@@ -135,18 +152,22 @@
 
       <div class="section">
         <h2>Performance Log</h2>
-        <table>
-          <thead><tr><th>Time</th><th>Price</th><th>Position</th><th>Fees</th><th>Inventory Impact</th><th>Net Benefit</th><th>ETH Weight</th></tr></thead>
-          <tbody id="rowsPerf"></tbody>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Time</th><th>Price</th><th>Position</th><th>Fees</th><th>Inventory Impact</th><th>Net Benefit</th><th>ETH Weight</th></tr></thead>
+            <tbody id="rowsPerf"></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="section">
         <h2>Recent Swaps</h2>
-        <table>
-          <thead><tr><th>Block</th><th>Tx</th><th>Sender</th><th>amount0</th><th>amount1</th><th>Tick</th></tr></thead>
-          <tbody id="rowsSwaps"></tbody>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Block</th><th>Tx</th><th>Sender</th><th>amount0</th><th>amount1</th><th>Tick</th></tr></thead>
+            <tbody id="rowsSwaps"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -246,6 +267,9 @@
           ["heroPrice","heroStatus","positionValue","feesValue","feeApr","ethWeight","netBenefit","inventoryImpact","distLower","distUpper"].forEach((id)=>set(id,"-"));
           document.getElementById("rowsPerf").innerHTML = '<tr><td colspan="7">No ETH performance snapshot yet.</td></tr>';
           document.getElementById("rowsSwaps").innerHTML = '<tr><td colspan="6">No swaps yet.</td></tr>';
+          const noPos = document.getElementById("activePosLink");
+          noPos.textContent = "-";
+          noPos.href = "#";
           return;
         }
 
@@ -257,6 +281,15 @@
         const weight = Number(latest.position?.ethWeightBps || 0) / 100;
         const a = apr(recent);
         const range = latest.range || {};
+        const tokenId = String(latest.tokenId || "").trim();
+        const posLink = document.getElementById("activePosLink");
+        if (tokenId) {
+          posLink.textContent = tokenId;
+          posLink.href = `https://app.uniswap.org/positions/v4/arbitrum/${tokenId}`;
+        } else {
+          posLink.textContent = "-";
+          posLink.href = "#";
+        }
 
         set("heroPrice", usd(price));
         set("heroStatus", range.status || "-");
