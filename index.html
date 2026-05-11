@@ -121,6 +121,16 @@
       </div>
 
       <div class="section">
+        <h2>Configured Positions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Pair</th><th>NFT</th><th>Pool</th><th>Status</th></tr></thead>
+            <tbody id="rowsPositions"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
         <h2>Contingency Backtest</h2>
         <div class="grid">
           <div class="card"><div class="k">Trigger</div><div class="vs" id="cbTrigger">-</div></div>
@@ -252,6 +262,7 @@
         const recent = perf.recent || [];
         const pool = activity.pools?.eth?.poolActivity || activity.poolActivity || {};
         const flow = activity.ethFlowSignal || {};
+        const runtimePositions = activity.runtimePositions || [];
 
         set("updated", `Last publish: ${activity.generatedAtUtc || "-"} UTC`);
         set("poolId", pool.poolId || "-");
@@ -262,6 +273,21 @@
         setV("flowCurrentSell", pct(Number(flow.flowCurrentSellEthShareBps || 0) / 100));
         setV("flowPreviousSell", pct(Number(flow.flowPreviousSellEthShareBps || 0) / 100));
         setV("flowNet", `${Number(flow.flowNetEthInBps || 0).toFixed(0)} bps`, Number(flow.flowNetEthInBps || 0) > 0 ? "good" : "warn");
+
+        const rowsPositions = document.getElementById("rowsPositions");
+        rowsPositions.innerHTML = "";
+        if (runtimePositions.length) {
+          runtimePositions.forEach(p => {
+            const label = p.label || p.key || "-";
+            const nft = String(p.positionTokenId || "").trim();
+            const pool = p.poolId || "-";
+            const nftCell = nft ? `<a href="https://app.uniswap.org/positions/v4/arbitrum/${nft}" target="_blank" rel="noreferrer">${nft}</a>` : "-";
+            const status = nft ? "configured" : "waiting NFT";
+            rowsPositions.insertAdjacentHTML("beforeend", `<tr><td>${label}</td><td>${nftCell}</td><td><code>${short(pool)}</code></td><td>${status}</td></tr>`);
+          });
+        } else {
+          rowsPositions.innerHTML = '<tr><td colspan="4">No multi-position runtime config found.</td></tr>';
+        }
 
         if (!latest) {
           ["heroPrice","heroStatus","positionValue","feesValue","feeApr","ethWeight","netBenefit","inventoryImpact","distLower","distUpper"].forEach((id)=>set(id,"-"));
