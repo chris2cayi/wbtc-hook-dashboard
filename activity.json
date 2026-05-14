@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-14T20:32:54+00:00",
+  "generatedAtUtc": "2026-05-14T22:11:38+00:00",
   "activePool": "eth",
   "runtimePositions": [],
   "pools": {
@@ -50,34 +50,34 @@
   },
   "ethPositionPerformance": {
     "latest": {
-      "timestamp": "2026-05-14T20:32:53Z",
+      "timestamp": "2026-05-14T22:11:38Z",
       "tokenId": 168183,
       "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
-      "tick": -198952,
+      "tick": -198921,
       "tickLower": -199040,
       "tickUpper": -198230,
-      "priceUsdcPerEth": 2291.2130632757403,
+      "priceUsdcPerEth": 2298.3058627086784,
       "range": {
         "status": "in-range",
         "priceLower": 2271.0924485766686,
         "priceUpper": 2462.6965813725883,
-        "tickDistanceToLower": 88,
-        "tickDistanceToUpper": 722,
-        "distanceToLowerBps": 88.59443265588436,
-        "distanceToUpperBps": 748.4398585423522
+        "tickDistanceToLower": 119,
+        "tickDistanceToUpper": 691,
+        "distanceToLowerBps": 119.82521516931189,
+        "distanceToUpperBps": 715.269109004345
       },
       "position": {
-        "eth": 0.3254948578976989,
-        "usdc": 92.34343260554874,
-        "valueUsd": 838.1215030498372,
-        "ethWeightBps": 8898
+        "eth": 0.311276574898903,
+        "usdc": 124.97039861693113,
+        "valueUsd": 840.379175630957,
+        "ethWeightBps": 8513
       },
       "feesUnclaimed": {
-        "eth": 0.002705491530687364,
-        "usdc": 6.126336,
-        "valueUsd": 12.325193537692765
+        "eth": 0.002718264023227677,
+        "usdc": 6.171927,
+        "valueUsd": 12.41932914097425
       },
-      "totalValueUsd": 850.4466965875299,
+      "totalValueUsd": 852.7985047719312,
       "wallet": {
         "address": "0x3A4b297C3CbD477525aE13EE6C8929Bd34397Af3",
         "ethRaw": "4067787804798992",
@@ -87,57 +87,13 @@
       },
       "performance": {
         "baselineTimestamp": "2026-05-10T09:35:43Z",
-        "holdValueUsdAtCurrentPrice": 839.5494154034303,
-        "inventoryImpactUsd": -1.4279123535931089,
-        "feesValueUsd": 12.325193537692765,
-        "netBenefitUsd": 10.897281184099658
+        "holdValueUsdAtCurrentPrice": 841.3231101831901,
+        "inventoryImpactUsd": -0.9439345522331313,
+        "feesValueUsd": 12.41932914097425,
+        "netBenefitUsd": 11.475394588741118
       }
     },
     "recent": [
-      {
-        "timestamp": "2026-05-12T11:56:50Z",
-        "tokenId": 168183,
-        "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
-        "tick": -198976,
-        "tickLower": -199040,
-        "tickUpper": -198230,
-        "priceUsdcPerEth": 2285.762619766822,
-        "range": {
-          "status": "in-range",
-          "priceLower": 2271.0924485766686,
-          "priceUpper": 2462.6965813725883,
-          "tickDistanceToLower": 64,
-          "tickDistanceToUpper": 746,
-          "distanceToLowerBps": 64.59521803855685,
-          "distanceToUpperBps": 774.069713432519
-        },
-        "position": {
-          "eth": 0.33651770566678885,
-          "usdc": 67.11855335781851,
-          "valueUsd": 836.318145860658,
-          "ethWeightBps": 9197
-        },
-        "feesUnclaimed": {
-          "eth": 0.002144523275765803,
-          "usdc": 4.827721,
-          "valueUsd": 9.729592140965368
-        },
-        "totalValueUsd": 846.0477380016234,
-        "wallet": {
-          "address": "0x3A4b297C3CbD477525aE13EE6C8929Bd34397Af3",
-          "ethRaw": "4067787804798992",
-          "eth": 0.004067787804798992,
-          "usdcRaw": "6816139",
-          "usdc": 6.816139
-        },
-        "performance": {
-          "baselineTimestamp": "2026-05-10T09:35:43Z",
-          "holdValueUsdAtCurrentPrice": 838.1864242050257,
-          "inventoryImpactUsd": -1.868278344367623,
-          "feesValueUsd": 9.729592140965368,
-          "netBenefitUsd": 7.861313796597745
-        }
-      },
       {
         "timestamp": "2026-05-12T14:18:28Z",
         "tokenId": 168183,
@@ -1148,6 +1104,50 @@
           "inventoryImpactUsd": -1.4279123535931089,
           "feesValueUsd": 12.325193537692765,
           "netBenefitUsd": 10.897281184099658
+        }
+      },
+      {
+        "timestamp": "2026-05-14T22:11:38Z",
+        "tokenId": 168183,
+        "poolId": "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8",
+        "tick": -198921,
+        "tickLower": -199040,
+        "tickUpper": -198230,
+        "priceUsdcPerEth": 2298.3058627086784,
+        "range": {
+          "status": "in-range",
+          "priceLower": 2271.0924485766686,
+          "priceUpper": 2462.6965813725883,
+          "tickDistanceToLower": 119,
+          "tickDistanceToUpper": 691,
+          "distanceToLowerBps": 119.82521516931189,
+          "distanceToUpperBps": 715.269109004345
+        },
+        "position": {
+          "eth": 0.311276574898903,
+          "usdc": 124.97039861693113,
+          "valueUsd": 840.379175630957,
+          "ethWeightBps": 8513
+        },
+        "feesUnclaimed": {
+          "eth": 0.002718264023227677,
+          "usdc": 6.171927,
+          "valueUsd": 12.41932914097425
+        },
+        "totalValueUsd": 852.7985047719312,
+        "wallet": {
+          "address": "0x3A4b297C3CbD477525aE13EE6C8929Bd34397Af3",
+          "ethRaw": "4067787804798992",
+          "eth": 0.004067787804798992,
+          "usdcRaw": "6816139",
+          "usdc": 6.816139
+        },
+        "performance": {
+          "baselineTimestamp": "2026-05-10T09:35:43Z",
+          "holdValueUsdAtCurrentPrice": 841.3231101831901,
+          "inventoryImpactUsd": -0.9439345522331313,
+          "feesValueUsd": 12.41932914097425,
+          "netBenefitUsd": 11.475394588741118
         }
       }
     ]
